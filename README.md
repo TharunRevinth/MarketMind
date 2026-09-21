@@ -10,7 +10,7 @@ The primary user interface is a high-performance Streamlit dashboard featuring:
 - **Volume & Volatility Suite**: Overlays and metrics for VWAP (Volume-Weighted Average Price), OBV (On-Balance Volume money flow), ATR (Average True Range volatility & risk stop-loss), and Bollinger Bands (20-period, 2σ).
 - **Multi-Timeframe Analysis**: Cross-examines macro daily trends against short-term intraday momentum (15M) to verify confluence and spot optimal entry points.
 - **Trader's Intelligence**: Automated news analysis that scans for regulatory issues, earnings misses, and management instability.
-- **Investor Profiling & Live Asset Check**: Dynamic risk assessment that tailors stock suggestions based on your age and income, with instant matching alerts on selected assets.
+- **Investor Profiling & Live Asset Check**: Dynamic risk assessment that tailors stock suggestions based on your income capacity, with instant matching alerts on selected assets.
 - **Interactive Technical Terminal**: Interactive candlestick charts powered by Plotly with customizable overlays and secondary volume/money-flow subplots.
 - **Manual Override**: Toggle between AI-driven signals and manual trend analysis for event-driven trading.
 

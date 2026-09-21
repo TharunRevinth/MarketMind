@@ -312,37 +312,22 @@ st.markdown(f"""
 
 # --- SIDEBAR: INVESTOR PROFILING ---
 st.sidebar.header("👤 Investor Profile")
-age = st.sidebar.slider("Your Age", 18, 80, 25)
-income_level = st.sidebar.selectbox("Monthly Income", ["Low (< 30k)", "Medium (30k-1L)", "High (> 1L)"])
+income_level = st.sidebar.selectbox("Monthly Income Tier", ["Low (< 30k)", "Medium (30k-1L)", "High (> 1L)"], index=1)
 
-def get_risk_tolerance(age, income_str):
-    # Professional Scoring System (0-10)
-    score = 0
-    
-    # Age Factor (Inverse relationship with risk)
-    if age <= 25: score += 5  # Very Aggressive phase
-    elif age <= 35: score += 4
-    elif age <= 45: score += 3
-    elif age <= 60: score += 2
-    else: score += 1 # Preservation phase
-    
-    # Income Factor (Capacity to absorb loss)
-    if "High" in income_str: score += 5
-    elif "Medium" in income_str: score += 3
-    else: score += 1
-    
-    # Final Categorization with strict levels
-    if score >= 9:
+def get_risk_tolerance(income_str):
+    """
+    Income-based risk capacity segregation.
+    Maps capital capacity directly to quantitative risk categories and capital safety tiers.
+    """
+    if "High" in income_str:
         return "Aggressive (Volatile)", "High", "High Risk, High Reward"
-    elif score >= 7:
+    elif "Medium" in income_str:
         return "Growth (Moderate)", "Medium", "Balanced Portfolio"
-    elif score >= 5:
-        return "Conservative (Blue Chip)", "Low", "Capital Preservation"
     else:
-        # Very low income or very high age
-        return "Conservative (Blue Chip)", "Very Low", "Fixed Income Focus"
+        # Low (< 30k)
+        return "Conservative (Blue Chip)", "Very Low", "Capital Preservation & Blue Chip Focus"
 
-user_risk_cat, user_risk_level, risk_desc = get_risk_tolerance(age, income_level)
+user_risk_cat, user_risk_level, risk_desc = get_risk_tolerance(income_level)
 st.sidebar.info(f"Risk Profile: **{user_risk_cat}**\nRisk Level: **{user_risk_level}**\n\nStrategy: *{risk_desc}*")
 
 # --- MANUAL OVERRIDE (For Low Probabilities) ---
@@ -362,7 +347,7 @@ st.sidebar.divider()
 st.sidebar.header("💡 Top Picks for You")
 cats = load_categories()
 
-# Strict filtering based ONLY on the user's specific age/income profile
+# Strict filtering based on the user's income-derived risk capacity
 user_matches = cats[
     (cats['Category'] == user_risk_cat) & 
     (cats['Risk_Level'] == user_risk_level)
