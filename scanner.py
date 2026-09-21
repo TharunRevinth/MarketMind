@@ -7,6 +7,25 @@ DEFAULT_TICKERS = [
     "AMD", "NFLX", "DIS", "PYPL", "INTC", "CSCO", "PEP", "KO", "ORCL", "CRM"
 ]
 
+class ScanResult:
+    def __init__(self, ticker, signal, reason, metrics=None):
+        self.ticker = ticker
+        self.signal = signal
+        self.reason = reason
+        self.metrics = metrics or {}
+
+    def __iter__(self):
+        return iter((self.ticker, self.signal, self.reason))
+
+    def __getitem__(self, item):
+        if item == 0: return self.ticker
+        if item == 1: return self.signal
+        if item == 2: return self.reason
+        raise IndexError("ScanResult index out of range")
+
+    def __lt__(self, other):
+        return self.ticker < other.ticker
+
 class StockScanner:
     def __init__(self, tickers=None):
         self.tickers = tickers or DEFAULT_TICKERS
@@ -16,13 +35,15 @@ class StockScanner:
             stock = yf.Ticker(ticker)
             data = stock.history(period="6mo")
             if data.empty:
-                return ticker, "ERROR", "No data found"
+                return ScanResult(ticker, "ERROR", "No data found")
             
             analyzer = StockAnalyzer(data)
-            signal, reason = analyzer.get_signals()
-            return ticker, signal, reason
+            analysis = analyzer.get_comprehensive_analysis()
+            signal = analysis['signal']
+            reasons = " | ".join(analysis['reasons']) if analysis['reasons'] else "Consolidation / Rangebound"
+            return ScanResult(ticker, signal, reasons, analysis.get('indicators', {}))
         except Exception as e:
-            return ticker, "ERROR", str(e)
+            return ScanResult(ticker, "ERROR", str(e))
 
     def scan_all(self):
         results = []
@@ -33,10 +54,15 @@ class StockScanner:
         return results
 
 if __name__ == "__main__":
-    scanner = StockScanner()
-    print("Scanning stocks...")
+    scanner = StockScanner(["RELIANCE.NS", "TCS.NS", "INFY.NS", "AAPL", "MSFT"])
+    print("Scanning stocks with Volume & Volatility indicators...")
     results = scanner.scan_all()
     
     print("\n--- Scan Results ---")
-    for ticker, signal, reason in sorted(results):
-        print(f"{ticker:8} | {signal:8} | {reason}")
+    for res in sorted(results):
+        m = res.metrics
+        vwap_str = f"VWAP: {m.get('vwap', 0):.2f}" if 'vwap' in m else ""
+        atr_str = f"ATR: {m.get('atr', 0):.2f}" if 'atr' in m else ""
+        bb_str = f"BB: {m.get('bb_state', 'N/A')}" if 'bb_state' in m else ""
+        print(f"{res.ticker:<12} | {res.signal:<8} | {vwap_str:<15} | {atr_str:<12} | {bb_str:<25} | {res.reason}")
+

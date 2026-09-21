@@ -4,8 +4,14 @@ import yfinance as yf
 import pickle
 import numpy as np
 import plotly.graph_objects as go
+from plotly.subplots import make_subplots
 from datetime import datetime
 import time
+import os
+import sys
+
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from analyzer import StockAnalyzer
 
 # --- LOAD DATA ---
 @st.cache_data
@@ -392,19 +398,63 @@ ticker_list = cats['Ticker'].tolist()
 if not ticker_list:
     ticker_list = ["RELIANCE", "TCS", "INFY"] # Fallback
 
-ticker_col, info_col = st.columns([1, 3])
+ticker_col, info_col = st.columns([1, 2.8])
 with ticker_col:
     ticker_input = st.selectbox("Select Asset", ticker_list)
 full_ticker = ticker_input + ".NS"
 
-# --- TIMEFRAME SELECTOR ---
-st.markdown("### 📊 Market Momentum")
-timeframe = st.radio(
-    "Select Timeframe",
-    ["1D", "5D", "1M", "6M", "1Y", "MAX"],
-    horizontal=True,
-    label_visibility="collapsed"
-)
+with info_col:
+    # --- LIVE ASSET CHECK (Matching System Architecture) ---
+    stock_rows = cats[cats['Ticker'] == ticker_input]
+    if not stock_rows.empty:
+        stock_info = stock_rows.iloc[0]
+        is_profile_match = (stock_info['Category'] == user_risk_cat)
+        match_status = "Profile Match ✅" if is_profile_match else f"Profile Mismatch ⚠️ ({stock_info['Category']})"
+        match_color = "#00f2ad" if is_profile_match else "#ffbd03"
+        border_color = "rgba(0, 242, 173, 0.3)" if is_profile_match else "rgba(255, 189, 3, 0.3)"
+        bg_color = "rgba(0, 242, 173, 0.05)" if is_profile_match else "rgba(255, 189, 3, 0.05)"
+
+        st.markdown(f"""
+            <div style="background: {bg_color}; border: 1px solid {border_color}; border-radius: 12px; padding: 10px 18px; margin-top: 4px;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <span style="color: #8892b0; font-size: 0.72rem; text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px;">LIVE ASSET CHECK</span>
+                        <div style="font-size: 1.05rem; font-weight: 800; color: #ffffff;">{ticker_input} &bull; <span style="color: {match_color};">{match_status}</span></div>
+                    </div>
+                    <div style="text-align: right;">
+                        <span style="font-size: 0.72rem; color: #8892b0;">INVESTOR TARGET</span>
+                        <div style="font-size: 0.88rem; font-weight: 700; color: #4facfe;">{user_risk_cat}</div>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 14px; margin-top: 6px; font-size: 0.8rem; color: #a0aec0; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 5px;">
+                    <span>Category: <strong style="color: #ffffff;">{stock_info['Category']}</strong></span>
+                    <span>Risk Level: <strong style="color: #ffffff;">{stock_info['Risk_Level']}</strong></span>
+                    <span>1Y Volatility: <strong style="color: #ffffff;">{stock_info['Volatility']:.2%}</strong></span>
+                    <span>Max Drawdown: <strong style="color: #ffffff;">{stock_info['Max_Drawdown']:.2%}</strong></span>
+                    <span>Safety: <strong style="color: #ffffff;">{stock_info['Capital_Safety']}</strong></span>
+                </div>
+            </div>
+        """, unsafe_allow_html=True)
+
+# --- TIMEFRAME & TECHNICAL OVERLAYS SELECTOR ---
+tf_col, overlay_col = st.columns([1.1, 1.9])
+with tf_col:
+    st.markdown("### 📊 Market Momentum")
+    timeframe = st.radio(
+        "Select Timeframe",
+        ["1D", "5D", "1M", "6M", "1Y", "MAX"],
+        horizontal=True,
+        label_visibility="collapsed"
+    )
+
+with overlay_col:
+    st.markdown("### 🛠️ Technical Overlays")
+    selected_overlays = st.multiselect(
+        "Technical Overlays",
+        options=["Bollinger Bands (20, 2σ)", "VWAP (Volume-Weighted Price)", "EMA 20 & EMA 50", "Volume & OBV Subplot"],
+        default=["Bollinger Bands (20, 2σ)", "VWAP (Volume-Weighted Price)", "Volume & OBV Subplot"],
+        label_visibility="collapsed"
+    )
 
 # Mapping timeframe to yfinance period/interval
 tf_map = {
@@ -418,7 +468,7 @@ tf_map = {
 period, interval = tf_map[timeframe]
 
 # Fetch Data
-with st.spinner("FETCHING MARKET DATA..."):
+with st.spinner("FETCHING MARKET DATA & COMPUTING INDICATORS..."):
     # Chart Data (Dynamic)
     chart_data = yf.Ticker(full_ticker).history(period=period, interval=interval)
     # Analysis Data (Always 1D/1M for short-term AI signals)
@@ -427,36 +477,131 @@ with st.spinner("FETCHING MARKET DATA..."):
     lt_data = yf.Ticker(full_ticker).history(period="1y", interval="1d")
 
 if not chart_data.empty:
-    # 1. LIVE CHART
+    # Compute all volume and volatility indicators
+    chart_analyzer = StockAnalyzer(chart_data)
+    chart_data = chart_analyzer.calculate_all()
+
+    # 1. LIVE CHART WITH VOLUME & VOLATILITY OVERLAYS
     st.markdown('<div class="glass-card" style="padding: 0;">', unsafe_allow_html=True)
-    fig = go.Figure(data=[go.Candlestick(x=chart_data.index,
-                open=chart_data['Open'],
-                high=chart_data['High'],
-                low=chart_data['Low'],
-                close=chart_data['Close'],
-                name="Market Price")])
+    show_subplot = "Volume & OBV Subplot" in selected_overlays
+
+    if show_subplot:
+        fig = make_subplots(
+            rows=2, cols=1,
+            shared_xaxes=True,
+            vertical_spacing=0.04,
+            row_heights=[0.72, 0.28],
+            specs=[[{"secondary_y": False}], [{"secondary_y": True}]]
+        )
+    else:
+        fig = go.Figure()
+
+    # Candlestick chart
+    candlestick_trace = go.Candlestick(
+        x=chart_data.index,
+        open=chart_data['Open'],
+        high=chart_data['High'],
+        low=chart_data['Low'],
+        close=chart_data['Close'],
+        name="Market Price"
+    )
+    if show_subplot:
+        fig.add_trace(candlestick_trace, row=1, col=1)
+    else:
+        fig.add_trace(candlestick_trace)
+
+    # Technical Overlays on Price Chart
+    if "Bollinger Bands (20, 2σ)" in selected_overlays and 'BB_Upper' in chart_data:
+        bb_upper_trace = go.Scatter(
+            x=chart_data.index, y=chart_data['BB_Upper'],
+            name="BB Upper", line=dict(color='rgba(79, 172, 254, 0.6)', width=1, dash='dash')
+        )
+        bb_lower_trace = go.Scatter(
+            x=chart_data.index, y=chart_data['BB_Lower'],
+            name="BB Lower", line=dict(color='rgba(79, 172, 254, 0.6)', width=1, dash='dash'),
+            fill='tonexty', fillcolor='rgba(79, 172, 254, 0.06)'
+        )
+        bb_mid_trace = go.Scatter(
+            x=chart_data.index, y=chart_data['BB_Middle'],
+            name="BB Middle (SMA 20)", line=dict(color='rgba(255, 189, 3, 0.75)', width=1)
+        )
+        if show_subplot:
+            fig.add_trace(bb_upper_trace, row=1, col=1)
+            fig.add_trace(bb_lower_trace, row=1, col=1)
+            fig.add_trace(bb_mid_trace, row=1, col=1)
+        else:
+            fig.add_trace(bb_upper_trace)
+            fig.add_trace(bb_lower_trace)
+            fig.add_trace(bb_mid_trace)
+
+    if "VWAP (Volume-Weighted Price)" in selected_overlays and 'VWAP' in chart_data:
+        vwap_trace = go.Scatter(
+            x=chart_data.index, y=chart_data['VWAP'],
+            name="VWAP", line=dict(color='#00f2fe', width=2, dash='dot')
+        )
+        if show_subplot:
+            fig.add_trace(vwap_trace, row=1, col=1)
+        else:
+            fig.add_trace(vwap_trace)
+
+    if "EMA 20 & EMA 50" in selected_overlays and 'EMA_short' in chart_data:
+        ema20_trace = go.Scatter(
+            x=chart_data.index, y=chart_data['EMA_short'],
+            name="EMA 20", line=dict(color='#00f2ad', width=1.5)
+        )
+        ema50_trace = go.Scatter(
+            x=chart_data.index, y=chart_data['EMA_long'],
+            name="EMA 50", line=dict(color='#e056fd', width=1.5)
+        )
+        if show_subplot:
+            fig.add_trace(ema20_trace, row=1, col=1)
+            fig.add_trace(ema50_trace, row=1, col=1)
+        else:
+            fig.add_trace(ema20_trace)
+            fig.add_trace(ema50_trace)
+
+    # Subplot: Volume and OBV
+    if show_subplot:
+        vol_colors = ['#00f2ad' if c >= o else '#ff4b4b' for c, o in zip(chart_data['Close'], chart_data['Open'])]
+        fig.add_trace(
+            go.Bar(
+                x=chart_data.index, y=chart_data['Volume'],
+                name="Volume", marker_color=vol_colors, opacity=0.35
+            ),
+            row=2, col=1, secondary_y=False
+        )
+        if 'OBV' in chart_data:
+            fig.add_trace(
+                go.Scatter(
+                    x=chart_data.index, y=chart_data['OBV'],
+                    name="OBV (Money Flow)", line=dict(color='#ffbd03', width=1.5)
+                ),
+                row=2, col=1, secondary_y=True
+            )
+
     fig.update_layout(
-        height=450, 
-        template="plotly_dark", 
-        margin=dict(l=10, r=10, t=20, b=10),
+        height=550 if show_subplot else 450,
+        template="plotly_dark",
+        margin=dict(l=10, r=10, t=25, b=10),
         xaxis_rangeslider_visible=False,
         paper_bgcolor='rgba(0,0,0,0)',
         plot_bgcolor='rgba(0,0,0,0)',
         xaxis_gridcolor='rgba(255,255,255,0.05)',
         yaxis_gridcolor='rgba(255,255,255,0.05)',
-        title=f"{ticker_input} - {timeframe} Perspective"
+        title=f"{ticker_input} - {timeframe} Perspective with Technical Overlays"
     )
     st.plotly_chart(fig, use_container_width=True)
     st.markdown('</div>', unsafe_allow_html=True)
 
     # 2. METRICS & PREDICTION
-    current_price = data['Close'].iloc[-1]
-    prev_price = data['Close'].iloc[-2]
+    current_price = chart_data['Close'].iloc[-1]
+    prev_price = chart_data['Close'].iloc[-2] if len(chart_data) > 1 else current_price
     price_diff = current_price - prev_price
-    price_pct = (price_diff / prev_price) * 100
+    price_pct = (price_diff / prev_price) * 100 if prev_price > 0 else 0
     delta_class = "delta-up" if price_diff >= 0 else "delta-down"
     delta_icon = "▴" if price_diff >= 0 else "▾"
 
+    # Row 1: AI, Price & Target Metrics
     m_col1, m_col2, m_col3, m_col4 = st.columns(4)
     
     with m_col1:
@@ -477,7 +622,7 @@ if not chart_data.empty:
 
     if model:
         try:
-            latest = data.tail(20).copy()
+            latest = (data if not data.empty else chart_data).tail(20).copy()
             latest['Return'] = latest['Close'].pct_change()
             latest['MA5'] = latest['Close'].rolling(window=5).mean()
             latest['MA10'] = latest['Close'].rolling(window=10).mean()
@@ -496,8 +641,8 @@ if not chart_data.empty:
             model = None # Fallback to technicals if prediction fails
 
     if not model:
-        avg_5 = data['Close'].tail(5).mean()
-        avg_10 = data['Close'].tail(10).mean()
+        avg_5 = chart_data['Close'].tail(5).mean()
+        avg_10 = chart_data['Close'].tail(10).mean()
         is_up = (avg_5 > avg_10)
 
     with m_col2:
@@ -534,8 +679,7 @@ if not chart_data.empty:
 
     with m_col3:
         if not manual_mode:
-            # Improved Target Price Logic
-            volatility = data['Close'].pct_change().std()
+            volatility = chart_data['Close'].pct_change().std()
             conf_factor = max(prob_val) 
             expected_change = current_price * volatility * conf_factor
             expected_price = current_price + expected_change if is_up else current_price - expected_change
@@ -559,7 +703,6 @@ if not chart_data.empty:
             """, unsafe_allow_html=True)
 
     with m_col4:
-        # Determine Holding Strategy
         if not lt_data.empty and len(lt_data) > 200:
             lt_data['SMA200'] = lt_data['Close'].rolling(window=200).mean()
             macro_bullish = lt_data['Close'].iloc[-1] > lt_data['SMA200'].iloc[-1]
@@ -585,15 +728,147 @@ if not chart_data.empty:
             </div>
         """, unsafe_allow_html=True)
 
-    # --- PROFILE SAFETY (Moved to Sidebar/Info) ---
-    st.sidebar.divider()
-    if not cats[cats['Ticker'] == ticker_input].empty:
-        stock_info = cats[cats['Ticker'] == ticker_input].iloc[0]
-        st.sidebar.write(f"Asset Safety: **{stock_info['Capital_Safety']}**")
-        if stock_info['Category'] == user_risk_cat:
-            st.sidebar.success("Profile Match ✅")
-        else:
-            st.sidebar.warning("Profile Mismatch ⚠️")
+    # Row 2: Volume & Volatility Indicators (From Image Specifications)
+    last_row_data = chart_data.iloc[-1]
+    
+    # VWAP Metrics
+    curr_vwap = last_row_data.get('VWAP', current_price)
+    vwap_diff = ((current_price / curr_vwap) - 1) * 100 if curr_vwap > 0 else 0
+    vwap_text = "Above VWAP (Bullish)" if current_price >= curr_vwap else "Below VWAP (Bearish)"
+    vwap_color = "#00f2ad" if current_price >= curr_vwap else "#ff4b4b"
+
+    # OBV Metrics
+    curr_obv = last_row_data.get('OBV', 0)
+    curr_obv_ema = last_row_data.get('OBV_EMA', 0)
+    obv_inflow = curr_obv >= curr_obv_ema
+    obv_text = "Accumulation (Inflow)" if obv_inflow else "Distribution (Outflow)"
+    obv_color = "#00f2ad" if obv_inflow else "#ff4b4b"
+    obv_display = f"{curr_obv/1e6:+.2f}M" if abs(curr_obv) >= 1e6 else (f"{curr_obv/1e3:+.1f}K" if abs(curr_obv) >= 1e3 else f"{curr_obv:.0f}")
+
+    # ATR & Safe Stop-Loss
+    curr_atr = last_row_data.get('ATR', 0)
+    safe_sl_long = current_price - (1.5 * curr_atr)
+
+    # Bollinger Bands Metrics
+    bb_upper = last_row_data.get('BB_Upper', current_price)
+    bb_lower = last_row_data.get('BB_Lower', current_price)
+    bb_mid = last_row_data.get('BB_Middle', current_price)
+    pct_b = last_row_data.get('BB_PctB', 0.5)
+    bandwidth = last_row_data.get('BB_Bandwidth', 0)
+
+    if current_price >= bb_upper:
+        bb_state = "Overbought (Upper Band)"
+        bb_color = "#ff4b4b"
+    elif current_price <= bb_lower:
+        bb_state = "Oversold (Lower Band)"
+        bb_color = "#00f2ad"
+    elif current_price > bb_mid:
+        bb_state = "Upper Channel (Bullish)"
+        bb_color = "#4facfe"
+    else:
+        bb_state = "Lower Channel (Bearish)"
+        bb_color = "#8892b0"
+
+    v_col1, v_col2, v_col3, v_col4 = st.columns(4)
+
+    with v_col1:
+        st.markdown(f"""
+            <div class="glass-card">
+                <div class="metric-label"><i class="fas fa-layer-group"></i> VWAP Benchmark</div>
+                <div class="metric-value">₹{curr_vwap:,.2f}</div>
+                <div class="metric-delta" style="color: {vwap_color};">{vwap_text} ({vwap_diff:+.2f}%)</div>
+            </div>
+        """, unsafe_allow_html=True)
+
+    with v_col2:
+        st.markdown(f"""
+            <div class="glass-card">
+                <div class="metric-label"><i class="fas fa-water"></i> OBV Money Flow</div>
+                <div class="metric-value">{obv_display}</div>
+                <div class="metric-delta" style="color: {obv_color};">{obv_text}</div>
+            </div>
+        """, unsafe_allow_html=True)
+
+    with v_col3:
+        st.markdown(f"""
+            <div class="glass-card">
+                <div class="metric-label"><i class="fas fa-arrows-alt-v"></i> ATR Volatility (SL)</div>
+                <div class="metric-value">₹{curr_atr:,.2f}</div>
+                <div class="metric-delta" style="color: #00f2ad;">Safe Long SL: ₹{safe_sl_long:,.2f} (1.5×)</div>
+            </div>
+        """, unsafe_allow_html=True)
+
+    with v_col4:
+        st.markdown(f"""
+            <div class="glass-card">
+                <div class="metric-label"><i class="fas fa-compress-arrows-alt"></i> Bollinger Channel</div>
+                <div class="metric-value" style="color: {bb_color}; font-size: 1.35rem;">{bb_state}</div>
+                <div class="metric-delta" style="color: #8892b0;">%B: {pct_b:.2f} | Width: {bandwidth:.1%}</div>
+            </div>
+        """, unsafe_allow_html=True)
+
+    # --- MULTI-TIMEFRAME ANALYSIS SECTION ---
+    st.divider()
+    st.subheader("🔭 Multi-Timeframe Analysis")
+
+    mtf_result = StockAnalyzer.analyze_multi_timeframe(ticker_input)
+    if mtf_result.get("status") == "SUCCESS":
+        tone = mtf_result.get("tone", "info")
+        badge_color = "#00f2ad" if tone == "success" else ("#ff4b4b" if tone == "error" else ("#ffbd03" if tone == "warning" else "#4facfe"))
+        
+        st.markdown(f"""
+            <div class="glass-card" style="border-left: 4px solid {badge_color};">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <div>
+                        <span style="color: #8892b0; font-size: 0.78rem; text-transform: uppercase; font-weight: 700;">CONFLUENCE VERDICT</span>
+                        <div style="font-size: 1.5rem; font-weight: 800; color: {badge_color};">{mtf_result['confluence']}</div>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.05); padding: 6px 14px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); font-size: 0.82rem; color: #8892b0;">
+                        Daily Trend vs Intraday Entry
+                    </div>
+                </div>
+                <div style="color: #e0e6ed; font-size: 0.95rem; line-height: 1.5; margin-bottom: 14px;">
+                    {mtf_result['recommendation']}
+                </div>
+            </div>
+        """, unsafe_allow_html=True)
+
+        htf_col, ltf_col = st.columns(2)
+        htf = mtf_result['higher_tf']
+        ltf = mtf_result['lower_tf']
+
+        with htf_col:
+            htf_sig_color = '#00f2ad' if htf['signal'] == 'BUY' else ('#ff4b4b' if htf['signal'] == 'SELL' else '#4facfe')
+            st.markdown(f"""
+                <div class="glass-card">
+                    <div style="font-size: 1rem; font-weight: 700; color: #4facfe; margin-bottom: 12px;">
+                        <i class="fas fa-calendar-alt"></i> Macro Daily Trend ({htf['interval']})
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; row-gap: 8px; font-size: 0.9rem;">
+                        <div>Trend Signal: <b style="color: {htf_sig_color}">{htf['signal']}</b></div>
+                        <div>Daily RSI: <b>{htf['rsi']:.1f}</b></div>
+                        <div>EMA Phase: <b>{htf['ema_status']}</b></div>
+                        <div>Volume Flow: <b>{htf['obv_status']}</b></div>
+                    </div>
+                </div>
+            """, unsafe_allow_html=True)
+
+        with ltf_col:
+            ltf_sig_color = '#00f2ad' if ltf['signal'] == 'BUY' else ('#ff4b4b' if ltf['signal'] == 'SELL' else '#4facfe')
+            st.markdown(f"""
+                <div class="glass-card">
+                    <div style="font-size: 1rem; font-weight: 700; color: #00f2ad; margin-bottom: 12px;">
+                        <i class="fas fa-stopwatch"></i> Intraday Momentum ({ltf['interval']})
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; row-gap: 8px; font-size: 0.9rem;">
+                        <div>Entry Signal: <b style="color: {ltf_sig_color}">{ltf['signal']}</b></div>
+                        <div>Intraday RSI: <b>{ltf['rsi']:.1f}</b></div>
+                        <div>VWAP Bias: <b>{ltf['vwap_status']}</b></div>
+                        <div>Channel State: <b>{ltf['bb_state']}</b></div>
+                    </div>
+                </div>
+            """, unsafe_allow_html=True)
+
 
     # 3. LONG TERM ANALYSIS
     st.divider()
@@ -706,4 +981,4 @@ st.markdown("""
 4. **Consult a Professional**: Always consult a SEBI-registered financial advisor before making any investment decisions.
 """)
 
-st.caption(f"System Version: 1.0.4 | Last Market Pulse: {datetime.now().strftime('%H:%M:%S')}")
+st.caption(f"System Version: 1.1.0 | Last Market Pulse: {datetime.now().strftime('%H:%M:%S')}")

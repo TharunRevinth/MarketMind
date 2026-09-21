@@ -16,24 +16,31 @@ def main():
     print(f"Scanning {'default stocks' if not tickers else ' '.join(tickers)}...")
     results = scanner.scan_all()
     
-    print("\n" + "="*50)
-    print(f"{'TICKER':<10} | {'SIGNAL':<10} | {'REASON'}")
-    print("-" * 50)
+    print("\n" + "="*100)
+    print(f"{'TICKER':<10} | {'SIGNAL':<8} | {'VWAP':<10} | {'ATR':<8} | {'BOLLINGER STATUS':<24} | {'TECHNICAL REASON'}")
+    print("-" * 100)
     
     suggestions = []
     
-    for ticker, signal, reason in sorted(results):
-        print(f"{ticker:<10} | {signal:<10} | {reason}")
+    for res in sorted(results):
+        ticker, signal, reason = res
+        m = getattr(res, 'metrics', {})
+        vwap_val = f"₹{m.get('vwap', 0):.2f}" if 'vwap' in m else "N/A"
+        atr_val = f"₹{m.get('atr', 0):.2f}" if 'atr' in m else "N/A"
+        bb_state = m.get('bb_state', 'N/A')
+        
+        print(f"{ticker:<10} | {signal:<8} | {vwap_val:<10} | {atr_val:<8} | {bb_state:<24} | {reason}")
         if signal == "BUY":
             suggestions.append(ticker)
 
     if suggestions:
-        print("\n" + "="*50)
+        print("\n" + "="*100)
         print("DAILY SUGGESTIONS (BUY SIGNALS):")
         print(", ".join(suggestions))
-        print("="*50)
+        print("="*100)
     else:
         print("\nNo clear BUY signals found today.")
 
 if __name__ == "__main__":
     main()
+
