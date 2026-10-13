@@ -162,3 +162,11 @@ data/*.csv
 .env
 .DS_Store
 *.log
+data/cache/
+ML_AND_NEURAL_NETWORKS.md766
+FINANCIAL_CONCEPTS_AND_INDICATORS.md
+ML_AND_NEURAL_NETWORKS.md
+scripts/train_rank_model.py
+scripts/prepare_basket_data.py
+scripts/train_basket_model.py
+scripts/update_tracker.py
