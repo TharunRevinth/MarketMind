@@ -1,120 +1,186 @@
-# MarketMind Terminal 📈
+# MarketMind Quantitative Terminal
 
-MarketMind is an algorithmic trading dashboard, quantitative basket builder, and stock analysis suite tailored for Indian equities (NSE/NIFTY) and global benchmarks. It combines machine learning ranking models, walk-forward backtesting, real-time technical indicators, risk-tiering, and live paper-trading tracking into a high-performance Streamlit terminal.
-
----
-
-## Core Systems
-
-### 1. NIFTY 500 Basket Builder (New 🧺)
-An end-to-end quantitative portfolio engine that scans the liquid Nifty 500 universe and builds an optimized 15-stock equity basket:
-- **Universe & Liquidity**: Fetches live constituents from the National Stock Exchange (NSE) archives with local fallback. Automatically applies a 60-day turnover liquidity filter (default $\ge$ ₹5 Crore/day) and benchmark alignment (`^CRSLDX` Nifty 500 index).
-- **Strict Anti-Leakage Features**: Daily indicators computed strictly from past data (1M/3M/6M relative strength vs Nifty 500, momentum, distance from 52-week high, 20-day volume surge, RSI-14, normalized MACD histogram, distance from 50/200 DMA, ATR volatility %, rolling beta, and rolling Sharpe).
-- **Walk-Forward Model Tournament**: Chronological walk-forward splits compare Logistic Regression, Gradient Boosting (`HistGradientBoosting`), and a Multi-Layer Perceptron (MLP) Neural Network on out-of-sample test months. Probability calibration ensures realistic confidence percentages.
-- **Position Sizing & Risk Controls**: Equal-weighted allocations (capped at ~6.67% per stock; residual held in cash) with automatic 2 $\times$ ATR defensive stop-loss levels and transparent technical reasoning for every pick.
-- **Risk Tiers & Monte Carlo Simulation**: Segregates selections into Conservative (low beta/volatility), Balanced (core market), and Aggressive (high momentum/beta) cohorts. Simulates 5,000 bootstrap iterations to project typical, bad (5th percentile), and good (95th percentile) monthly return ranges.
-- **Monthly Rebalancing with Turnover Buffer**: Retains existing basket holdings if they remain within the top 30 ranks, suppressing unnecessary turnover. Deducts realistic round-trip transaction costs (0.4%) on all portfolio transitions.
-- **Daily Monitoring & Regime Alerts**: Tracks daily stop-loss hits, 50/200-day moving average breakdowns, and triggers a macro market warning when the Nifty 500 drops below its 200-day SMA.
-- **Live Paper Trading & Intraday Accuracy Tracker**: Maintains an ongoing ledger (`data/paper_trades.csv`) tracking live portfolio valuation against the benchmark, and continuously audits out-of-sample intraday Logistic Regression predictions for an honest live accuracy score.
-
-### 2. Single Stock Terminal (Intraday & Macro 📊)
-- **AI Trend Signals**: 5-minute candle next-bar direction predictions powered by per-ticker Logistic Regression models (`model.pkl` + `scaler.pkl`).
-- **Volume & Volatility Suite**: Real-time calculations for VWAP (Volume-Weighted Average Price), OBV (On-Balance Volume money flow), ATR (Average True Range volatility & risk stop-loss), and Bollinger Bands (20-period, 2σ).
-- **Multi-Timeframe Analysis**: Cross-examines macro daily trends against short-term intraday momentum (15M) for directional confluence.
-- **Trader's Intelligence**: Automated news sentiment scanner identifying management instability, regulatory hurdles, or earnings surprises.
-- **Investor Profiling**: Dynamic risk assessment matching user income capacity with categorized asset profiles.
-
-### 3. Algorithmic Scanner (CLI 🖥️)
-- Multi-threaded scanning engine using Python's `concurrent.futures.ThreadPoolExecutor` for batch technical screening across dozens of tickers.
+MarketMind is an institutional-grade algorithmic portfolio construction and quantitative equity analysis platform designed for Indian equities (NSE Nifty 500) and benchmark indices. It combines cross-sectional factor ranking, walk-forward machine learning validation, intraday direction forecasting, automated liquidity screening, risk-budgeted position sizing, and live paper-trading tracking into a high-performance Streamlit terminal.
 
 ---
 
-## Installation & Setup
+## Technology Stack
 
-1. **Clone the repository**:
-   ```bash
-   git clone <repo-url>
-   cd MarketMind
-   ```
+| Layer | Technologies | Purpose |
+| :--- | :--- | :--- |
+| **Core Language** | Python 3.11+ / 3.14 | Core execution, vectorized mathematics, and data processing |
+| **User Interface** | Streamlit, Plotly, HTML5/CSS3 | Reactive analytics dashboard, interactive charting, investor terminal |
+| **Machine Learning** | Scikit-Learn | Logistic Regression, HistGradientBoosting, MLP Neural Nets, calibration |
+| **Data & Vectorization** | Pandas, NumPy, PyArrow | High-throughput matrix computations and vectorized indicator engines |
+| **Storage & Caching** | Apache Parquet | High-compression columnar storage for 10-year daily OHLCV tick data |
+| **Market Data Ingestion** | NSE India Archives, Yahoo Finance (`yfinance`) | Constituent lists, live pricing, and benchmark index history (`^CRSLDX`) |
 
-2. **Create and activate a virtual environment**:
-   ```bash
-   python3 -m venv .venv
-   source .venv/bin/activate
-   ```
+---
 
-3. **Install dependencies**:
-   ```bash
-   pip install -r requirements.txt
-   ```
+## System Architecture
+
+```mermaid
+flowchart TD
+    subgraph Ingestion["1. Data Ingestion & Universe Pipeline"]
+        NSE["NSE India Archives (ind_nifty500list.csv)"] --> Sym["499 Constituent Tickers + Benchmark (^CRSLDX)"]
+        Sym --> Cache[("Local Parquet Cache: 10Y Daily OHLCV")]
+        Cache --> LiqFilter["Liquidity Screening: ADTV >= INR 5 Crore/Day"]
+    end
+
+    subgraph Features["2. Anti-Leakage Feature Engine"]
+        LiqFilter --> PastOnly["Past-Only Historical Windows (T <= t)"]
+        PastOnly --> Calc["Compute: RS (1M/3M/6M), Mom (3M/6M/9M/12M/12-1), ATR%, Beta, Sharpe, Dist 52W High"]
+        Calc --> Panel[("Monthly Panel Dataset: 43,169 rows, 107 Months")]
+    end
+
+    subgraph Validation["3. Walk-Forward Tournament & Gating"]
+        Panel --> ChronoSplit{"Chronological Split"}
+        ChronoSplit --> Train["Train Split (65 Months)"]
+        ChronoSplit --> Val["Validation Split (24 Months)"]
+        ChronoSplit --> Holdout["Final Holdout Split (24 Months)"]
+        Train --> Models["ML Tournament: Logistic, HistGB, MLP"]
+        Val --> Gate{"Does ML Beat Momentum after 0.5% Costs?"}
+        Gate -->|No (Empirical Finding)| DefaultEngine["Deploy Robust Baseline: Mom_12_1"]
+        Gate -->|Yes| MLEngine["Deploy Calibrated ML Model"]
+    end
+
+    subgraph Portfolio["4. Portfolio Construction & Sizing"]
+        DefaultEngine --> Top15["Rank & Select Top 15 Liquid Stocks"]
+        Top15 --> Buffer["Top-30 Retention Buffer (Turnover Control)"]
+        Buffer --> Sizing["Equal-Weight Allocation (~6.67% per Stock)"]
+        Sizing --> RegimeCheck{"Is Benchmark < 200 SMA?"}
+        RegimeCheck -->|Yes| RegimeAlloc["Allocate 50% Cash Reserve + 50% Equity"]
+        RegimeCheck -->|No| FullAlloc["Allocate 100% Equity"]
+    end
+
+    subgraph Interface["5. Execution & Continuous Monitoring"]
+        RegimeAlloc --> Dashboard["Streamlit Production Dashboard"]
+        FullAlloc --> Dashboard
+        Dashboard --> InvestorMode["Investor Mode: Actionable Jargon-Free Plan"]
+        Dashboard --> QuantExpander["Quant Mode: Monte Carlo (5,000 runs) & Deep Analytics"]
+        Dashboard --> Monitor["Daily/Weekly Risk Alerts (Stop 2xATR, Crash 7%, 200 SMA)"]
+        Dashboard --> PaperLedger["Paper Trading Ledger & Intraday Accuracy Tracker"]
+    end
+```
+
+---
+
+## Core Systems & Capabilities
+
+### 1. Nifty 500 Basket Builder
+An end-to-end quantitative portfolio engine that scans the liquid Nifty 500 universe and builds an actionable 15-stock equity basket:
+- **Investor Mode**: Clean, plain-language interface designed for retail and institutional allocators. Provides exact share quantities, investment budgets in INR, entry timing guidelines, exact stop-loss exit prices, and next monthly review dates.
+- **Timing & Tranche Execution**: Suggests single-tranche deployment during broad market uptrends (Nifty 500 > 200 SMA) and staged 2-3 tranche execution over 2-3 weeks when the index is below its 200-day trend line.
+- **Liquidity Gating**: Screens out stocks with average daily turnover (ADTV) below INR 5 Crore/day, preventing illiquid slippage traps.
+- **Turnover Protection**: Employs a Top-30 rank retention buffer during monthly rebalancing, cutting unnecessary portfolio churn by more than 50%.
+- **Monte Carlo Risk Engine**: Runs a 5,000-iteration bootstrap simulation on historical panel returns to calculate probabilistic 5th, 50th, and 95th percentile monthly return scenarios.
+
+### 2. Single Stock Intraday Terminal
+A technical analysis and micro-forecasting engine for individual tickers:
+- **Intraday Machine Learning**: Per-ticker Logistic Regression models predicting next 5-minute candle direction (UP/DOWN) with confidence scoring.
+- **Technical Indicator Suite**: Real-time calculations for VWAP (Volume-Weighted Average Price), OBV (On-Balance Volume money flow), ATR (Average True Range volatility & risk exit), and Bollinger Bands (20-period, 2-sigma).
+- **Multi-Timeframe Trend Confluence**: Compares short-term intraday momentum (15M) against macro daily moving averages (50/200 DMA) for trend alignment.
+- **Automated Headline Risk Sentiment**: Analyzes recent company news for governance, regulatory, litigation, or earnings red flags.
+
+### 3. Safety Monitoring & Replacement Alerts
+- **Daily Protective Scans**: Evaluates active basket holdings against 2.0x ATR stop-loss breaches, single-day crash drops (>= 7%), and 200-day SMA breakdowns.
+- **Actionable Replacement Advice**: Automatically identifies the next-highest ranked liquid candidate not currently held in the basket (e.g., *"Stock X closed below its exit price. Consider selling and replacing with Stock Y"*).
+- **User Action Protocol**: Explicitly alerts the user that recommendations require manual execution, as the platform does not place automated brokerage orders.
 
 ---
 
 ## Execution Workflow (Step-by-Step Order)
 
-Follow this order to run the data pipeline, train models, launch the dashboard, and manage daily monitoring:
+Follow this sequence to run the data pipeline, execute quantitative studies, launch the dashboard, and manage daily monitoring:
 
-### Step 1: Prepare Nifty 500 Panel Dataset
-Fetches Nifty 500 constituents, downloads historical daily prices with disk caching, computes technical indicators without lookahead, and builds the walk-forward monthly dataset (`data/basket_dataset.parquet`).
+```mermaid
+flowchart LR
+    Step1["Step 1: Ingest Data<br><code>prepare_basket_data.py</code>"] --> Step2["Step 2: Train & Gate<br><code>train_basket_model.py</code>"]
+    Step2 --> Step3["Step 3: Rebalance Study<br><code>rebalance_study.py</code>"]
+    Step3 --> Step4["Step 4: Launch Terminal<br><code>streamlit run app/dashboard.py</code>"]
+    Step4 --> Step5["Step 5: Daily Audit<br><code>update_tracker.py</code>"]
+```
 
-- **Quick sample run (~50 stocks)**:
-  ```bash
-  python3 scripts/prepare_basket_data.py --sample 50
-  ```
-- **Full Nifty 500 universe run**:
-  ```bash
-  python3 scripts/prepare_basket_data.py
-  ```
+### Step 1: Ingest Data & Build Panel Dataset
+Downloads 10-year historical daily prices for all 499 Nifty 500 constituents and the `^CRSLDX` benchmark with local Parquet disk caching, filters liquidity, and compiles `data/basket_dataset.parquet`:
+```bash
+# Quick test run on 50 stocks
+python3 scripts/prepare_basket_data.py --sample 50
 
-### Step 2: Full-History Momentum Robustness & Model Tournament
-Runs the comprehensive evaluation across all historical dates and splits:
-- **Default Strategy**: `Mom_12_1` (12-month return skipping the most recent 1-month reversal period). Selected strictly by calendar-year robustness (8/10 positive excess return years, 74.0% positive 12M rolling periods, +0.0240 Spearman IC across all 107 rebalance months).
-- **Three-Way Chronological Split**: 65 months Train -> 24 months Validation -> 24 months Final Holdout (touched once, reported once).
-- **ML Decision Gate**: The classification ML model is only deployed if it beats the momentum baseline on the final holdout after 0.4% costs. Since classification models showed no out-of-sample edge (AUC 0.475, IC -0.045), the system transparently defaults to `Mom_12_1`.
+# Full Nifty 500 production run
+python3 scripts/prepare_basket_data.py
+```
 
+### Step 2: Model Tournament & Strategy Training
+Executes the three-way walk-forward tournament across 107 historical monthly rebalance dates (Train: 65 months, Validation: 24 months, Holdout: 24 months) and evaluates candidate ML models against momentum baselines net of 0.4% costs:
 ```bash
 python3 scripts/train_basket_model.py
 ```
 
-### Optional Step 2b: Cross-Sectional Rank ML Experiment
-To run the specialized cross-sectional rank machine learning tournament (Ridge vs HistGradientBoosting on 6 non-redundant features using expanding-window walk-forward IC):
-
+### Step 3: Run Rebalancing Frequency & Event Replacement Study
+Simulates daily execution across the full 9-year history and the untouched 24-month final holdout net of 0.5% round-trip costs and slippage:
 ```bash
-python3 scripts/train_rank_model.py
+python3 scripts/rebalance_study.py
 ```
 
-### Step 3: Launch the Interactive Dashboard
-Opens the Streamlit terminal featuring both the **Single Stock Terminal** and the **Basket Builder** tabs:
-
+### Step 4: Launch Interactive Streamlit Dashboard
+Starts the interactive quantitative dashboard on `http://localhost:8501`:
 ```bash
 streamlit run app/dashboard.py
 ```
 
-### Step 4: Run Daily Tracking & Risk Auditing
-Executes daily maintenance: updates paper trading portfolio valuation against the Nifty 500, scans for defensive stop-loss / moving average alerts, and verifies intraday predictions against actual candles:
-
+### Step 5: Daily Safety Audit & Paper Portfolio Tracker
+Executes daily mark-to-market updates, audits open paper trading positions against the benchmark, scans for stop-loss and moving average breaches, and verifies intraday predictions:
 ```bash
 python3 scripts/update_tracker.py
 ```
 
-### Optional: Train Intraday Logistic Regression Models (Existing Feature)
-To retrain the 5-minute single-stock intraday models:
-```bash
-python3 -m scripts.train_all
-```
+---
 
-### Optional: Run CLI Batch Scanner
-```bash
-python3 main.py RELIANCE.NS TCS.NS INFY.NS
-```
+## Empirical Research & Quantitative Results
+
+### 1. Rebalancing Frequency & Event Replacement Study
+*Evaluated across all 107 monthly rebalances (~9 years: Oct 2017 to Oct 2026) and the untouched 24-month final holdout (Oct 2024 to Oct 2026), net of 0.5% round-trip costs (0.4% commission/taxes + 0.1% execution slippage). Signals use previous close; trades execute at next open.*
+
+#### Full-History Comparison (Oct 2017 to Oct 2026)
+| Strategy Configuration | CAGR | Excess CAGR vs N500 | Sharpe | Max Drawdown | Worst Single Trade | Monthly Turnover | Total Costs Paid | Replacements | Calendar Win % |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **Setup (a): Monthly Rebalance (Recommended)** | **42.44%** | **+31.88%** | **1.23** | **-43.03%** | -79.33% | **29.4%** | **INR 435,182** | **0** | **80.0% (8/10 Yrs)** |
+| Setup (b): Weekly Rebalance | 45.79% | +35.23% | 1.33 | -39.94% | -78.98% | 34.5% | INR 607,467 | 0 | 70.0% (7/10 Yrs) |
+| Setup (c): Monthly + Event Replacement | 39.16% | +28.60% | 1.17 | -48.93% | **-28.00%** | 157.3% | INR 2,205,698 | 1,500 | 70.0% (7/10 Yrs) |
+| Setup (d): Monthly + Event + 50% Cash Regime | 38.59% | +28.02% | 1.16 | -48.41% | **-28.00%** | 156.3% | INR 2,193,033 | 1,499 | 70.0% (7/10 Yrs) |
+
+#### Untouched 24-Month Final Holdout (Oct 2024 to Oct 2026)
+| Strategy Configuration | CAGR | Excess CAGR vs N500 | Sharpe | Max Drawdown | Worst Single Trade | Monthly Turnover | Total Costs Paid | Replacements | Calendar Win % |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **Setup (a): Monthly Rebalance (Recommended)** | **37.08%** | **+41.69%** | **1.04** | **-30.47%** | -48.71% | **33.5%** | **INR 22,402** | **0** | **100.0%** |
+| Setup (b): Weekly Rebalance | 46.64% | +51.24% | 1.26 | -34.57% | -47.82% | 42.5% | INR 30,302 | 0 | 100.0% |
+| Setup (c): Monthly + Event Replacement | 22.78% | +27.38% | 0.64 | -37.92% | **-21.76%** | 204.2% | INR 119,173 | 430 | 66.7% |
+| Setup (d): Monthly + Event + 50% Cash Regime | 20.78% | +25.39% | 0.59 | -37.92% | **-21.76%** | 203.5% | INR 118,571 | 430 | 66.7% |
+
+#### 3x3 Event Rule Robustness Grid (Development Period: Oct 2017 to Sep 2024)
+*Parameter sensitivity across 9 threshold combinations without touching the holdout:*
+| Single-Day Crash Drop | ATR Stop-Loss | CAGR | Excess CAGR | Sharpe | Max Drawdown | Worst Single Trade | Replacements | Total Costs Paid | Win Years % |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| 5% | 1.5x | 40.22% | +24.76% | 1.22 | -48.39% | -36.56% | 1,510 | INR 1,257,383 | 75.0% |
+| 5% | 2.0x | 41.88% | +26.42% | 1.26 | -47.16% | -36.56% | 1,402 | INR 1,201,587 | 75.0% |
+| 5% | 3.0x | 43.55% | +28.09% | 1.30 | -43.89% | -36.56% | 1,310 | INR 1,175,086 | 75.0% |
+| 7% | 1.5x | 40.40% | +24.95% | 1.22 | -48.68% | -36.56% | 1,149 | INR 871,602 | 75.0% |
+| **7%** | **2.0x (Robust Default)** | **43.67%** | **+28.21%** | **1.32** | **-48.93%** | **-28.00%** | **1,067** | **INR 828,769** | **75.0%** |
+| 7% | 3.0x | 44.81% | +29.35% | 1.35 | -46.88% | -32.42% | 996 | INR 812,380 | 75.0% |
+| 10% | 1.5x | 37.35% | +21.90% | 1.14 | -47.93% | -34.40% | 991 | INR 679,177 | 75.0% |
+| 10% | 2.0x | 39.38% | +23.92% | 1.19 | -47.69% | -34.40% | 931 | INR 623,964 | 75.0% |
+| 10% | 3.0x | 42.79% | +27.33% | 1.29 | -44.29% | -32.42% | 853 | INR 645,418 | 75.0% |
+
+> **Key Research Finding & Recommendation:**
+> 1. **Single-Stock Protection vs Portfolio Drag**: Mechanical mid-month stop-and-replace succeeds in capping catastrophic single-stock losses (-28.0% vs -79.3%). However, at the portfolio level, it causes extreme turnover (>157% per month) and multiplies transaction costs by 5x (INR 2.2M vs INR 435K). Momentum stocks naturally undergo volatile consolidations before trending; premature stop-outs consistently sell winners near short-term bottoms and buy new extended stocks at highs, dragging holdout CAGR down from 37.1% to 22.8%.
+> 2. **Final Rule**: **Monthly Rebalancing is retained as the default strategy** due to lower friction, 80% calendar-year consistency, and practical simplicity. Stop-loss and crash alerts serve as **discretionary safety warnings** for manual review rather than automatic daily churning.
 
 ---
 
-## Empirical Tournament Results (Full 107 Months, Net of 0.4% Costs)
-
-### Momentum Variants Comparison (2017 to 2026)
+### 2. Full-History Momentum Horizon Tournament
 | Variant | Lookback Horizon | Full-History CAGR | Excess CAGR vs N500 | Sharpe | Max DD | Win Rate | Mean IC | Positive Years | 12M Rolling Win % |
-| :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | **`Mom_12_1`** | **12M skipping 1M (Default)** | **+38.34%** | **+28.40%** | **1.06** | **-37.1%** | **63.6%** | **+0.0240** | **8 / 10** | **74.0%** |
 | `Mom_9M` | 9-Month Return | +39.82% | +29.89% | 1.12 | -38.8% | 64.5% | +0.0208 | 6 / 10 | 69.8% |
 | `Mom_6M` | 6-Month Return | +36.25% | +26.31% | 1.01 | -34.3% | 66.4% | +0.0188 | 6 / 10 | 71.9% |
@@ -122,7 +188,7 @@ python3 main.py RELIANCE.NS TCS.NS INFY.NS
 | `Mom_3M` | 3-Month Return | +31.58% | +21.65% | 0.88 | -44.3% | 65.4% | +0.0041 | 8 / 10 | 71.9% |
 | **Nifty 500** | Benchmark (`^CRSLDX`) | +9.94% | 0.00% | 0.19 | -32.7% | N/A | N/A | 6 / 10 | N/A |
 
-### Calendar-Year Excess Return (% vs Nifty 500 Index)
+### 3. Calendar-Year Return Breakdown (% vs Nifty 500)
 | Year | `Mom_12_1` (Default) | `Mom_9M` | `Mom_6M` | `Mom_12M` | `Mom_3M` | Nifty 500 Return |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | **2017 (3M)** | +15.9% | +12.0% | +12.4% | +13.9% | +5.8% | +8.4% |
@@ -135,77 +201,50 @@ python3 main.py RELIANCE.NS TCS.NS INFY.NS
 | **2024** | +5.7% | -5.8% | -6.4% | +5.7% | +9.4% | +10.6% |
 | **2025** | +6.5% | -12.7% | -12.1% | -3.4% | +0.7% | +5.2% |
 | **2026 (8M)**| +49.1% | +78.4% | +36.4% | +42.7% | +43.7% | -4.4% |
-| **Pos Yrs** | **8 / 10 (80%)** | 6 / 10 (60%) | 6 / 10 (60%) | 7 / 10 (70%) | 8 / 10 (80%) | 6 / 10 (60%) |
-
-> **Honest Assessment on Robustness**: Momentum is **not uniform across every single year**. In severe market bear transitions and choppy mean-reverting regimes (notably **2018** and **2022**), momentum experienced negative excess returns (-5.2% and -14.0% respectively) as market leaders rotated abruptly. However, over multi-year horizons, `Mom_12_1` demonstrated the highest calendar consistency (positive excess returns in 8 of 10 years and positive excess returns in 74.0% of rolling 12-month periods).
-
-### Market-Regime Filter Impact (50% Cash When Nifty 500 < 200 SMA)
-| Strategy Configuration | CAGR | Max Drawdown | Sharpe Ratio | Tail Risk Assessment |
-| :--- | :---: | :---: | :---: | :--- |
-| `Mom_12_1` without Regime Filter | **38.34%** | -37.08% | 1.06 | Full market participation during all pullbacks. |
-| `Mom_12_1` with 50% Cash Regime Filter | **33.85%** | **-35.34%** | **1.08** | Improves risk-adjusted return (Sharpe 1.08) while mitigating bear drawdowns. |
-| `Mom_6M` without Regime Filter | **36.25%** | -34.28% | 1.01 | Higher volatility during sharp corrections. |
-| `Mom_6M` with 50% Cash Regime Filter | **32.95%** | **-25.10%** | **1.06** | Curbs maximum peak-to-trough drawdown from -34.3% down to -25.1%. |
-
-### Liquidity Filter Audit (ADTV >= ₹5 Crore/Day)
-- **Universe Filter**: Filtered out **4,675 / 42,218 (11.07%)** stock-months across the 107 rebalance periods due to low trading turnover.
-- **Basket Filter**: Removed and replaced **132 / 1,605 (8.22%)** raw top-15 momentum picks that fell below the ₹5 Cr/day threshold, preventing illiquid slippage in live trading.
+| **Positive Yrs** | **8 / 10 (80%)** | 6 / 10 (60%) | 6 / 10 (60%) | 7 / 10 (70%) | 8 / 10 (80%) | 6 / 10 (60%) |
 
 ---
 
-## Project Structure
+## Repository Structure
 
 ```
 MarketMind/
 ├── app/
-│   ├── dashboard.py           # Main Streamlit dashboard (Single Stock + Basket Builder tabs)
-│   └── basket_tab.py          # Basket Builder UI component (with variants, regime filter, and tracking)
+│   ├── dashboard.py           # Main Streamlit dashboard (Single Stock Terminal + Basket Builder)
+│   └── basket_tab.py          # Basket Builder UI: Investor Mode & Quant Diagnostics
 ├── basket_universe.py         # NSE Nifty 500 constituents, price caching, and liquidity filter
-├── basket_features.py         # Indicator calculations (past-only) and monthly panel dataset generator
-├── basket_model.py            # Walk-forward model tournament, calibration, and persistence
-├── basket_scanner.py          # Live basket builder, equal-weight allocation, stop losses, and regime sizing
-├── basket_risk.py             # Risk tier filtering, technical reasoning, and Monte Carlo engine
-├── basket_backtest.py         # Walk-forward backtester with turnover buffer and 0.4% friction
-├── basket_monitor.py          # Daily defensive monitoring (stops, 50/200 DMA, market regime)
-├── basket_tracker.py          # Paper trading portfolio ledger and intraday prediction auditor
+├── basket_features.py         # Past-only indicator calculations; Mom 3M/6M/9M/12M/12-1, ATR%, ADTV_60D
+├── basket_model.py            # Three-way chronological split, Spearman IC, model tournament & gating
+├── basket_scanner.py          # Live basket builder, equal-weight allocation, stop-losses, regime cash
+├── basket_risk.py             # Risk tiers (Conservative/Balanced/Aggressive), Monte Carlo bootstrap
+├── basket_backtest.py         # Walk-forward backtester, top-30 buffer, 0.4% costs, calendar breakdown
+├── basket_monitor.py          # Daily & weekly defensive checks (2xATR, crash 7%, 200 DMA) with replacements
+├── basket_tracker.py          # Live paper trading ledger (paper_trades.csv) and prediction auditor
 ├── analyzer.py                # Single-stock technical indicator analyzer (VWAP, OBV, ATR, BB)
 ├── scanner.py                 # Multi-threaded batch stock scanner
-├── main.py                    # CLI entry point for batch scanner
+├── main.py                    # CLI entry point for batch stock scanner
 ├── scripts/
-│   ├── prepare_basket_data.py # Script: Downloads data and creates data/basket_dataset.parquet
-│   ├── train_basket_model.py  # Script: Trains and selects the best basket model
-│   ├── train_rank_model.py    # Script: Cross-sectional rank ML experiment (Ridge vs HistGB)
-│   ├── update_tracker.py      # Script: Updates paper trading valuations and audits predictions
-│   ├── train_model.py         # Script: Trains intraday 5m Logistic Regression model
-│   └── train_all.py           # Script: Batch trains intraday models for top Indian stocks
-├── data/                      # Cached datasets, paper trade ledgers, and categories
-├── models/                    # Saved model bundles (.pkl) and scalers
-└── requirements.txt           # Python dependencies
+│   ├── prepare_basket_data.py # Data ingestion & panel dataset generator CLI
+│   ├── train_basket_model.py  # Model tournament and baseline training CLI
+│   ├── rebalance_study.py     # Rebalancing frequency & event replacement simulation CLI
+│   ├── train_rank_model.py    # Cross-sectional rank ML research experiment CLI
+│   ├── update_tracker.py      # Daily automated tracking and auditing CLI
+│   ├── train_model.py         # Intraday 5m Logistic Regression training script
+│   └── train_all.py           # Batch trainer for intraday 5m models across all Nifty 500 stocks
+├── data/                      # Columnar Parquet cache, paper trading ledgers, and categories
+├── models/                    # Serialized model bundles (.pkl) and scalers
+└── requirements.txt           # Python package dependencies
 ```
 
 ---
 
-## Quantitative Methodology & Risk Disclaimers
+## Methodological Integrity & Disclaimers
 
 ### Anti-Leakage Protocol
-All feature engineering is strictly computed using information available at or before rebalance time $T$. Forward price returns from $T$ to $T+20$ are used exclusively as target labels during model evaluation and are never fed into feature transformations or scalers. Scalers are fitted solely on historical training splits.
+All features are computed using only data available at or before rebalance time $T$. Future price returns from $T$ to $T+20$ are used solely as evaluation targets and are never exposed to feature transformations or normalization scalers. Scalers are fitted exclusively on training splits.
 
-### Walk-Forward Model Selection Rule
-Candidate models are evaluated across chronological out-of-sample test months. Models are judged on:
-1. Top-15 Precision (% of top picks outperforming the Nifty 500).
-2. Top-15 Average Excess Return over the benchmark.
-3. Test Accuracy, ROC-AUC, and Spearman Rank Correlation (IC).
-If the classification or regression ML model does not clearly add IC or Sharpe beyond simpler transparent baselines after costs, the simpler baseline (`Mom_12_1`) is selected to eliminate overfitting risk.
+### Survivorship Bias Notice
+Historical backtests evaluate surviving members of the Nifty 500 index across past dates. Constituents that were delisted, relegated to micro-cap status, or suspended over the 10-year period are not captured. Real-world returns may be lower.
 
-### Known Limitations
-- **Survivorship Bias**: Historical backtests use current Nifty 500 constituents and do not include historical constituents that were delisted or relegated.
-- **Execution Slippage**: Real executions may experience wider spreads or slippage beyond the 0.4% modeled round-trip friction.
-- **Regime Shifts**: Momentum factors can suffer severe whipsaws during sudden market inflection points and sharp macro drawdowns.
-
----
-
-## Disclaimer
-**MarketMind is strictly for educational and research purposes.** Stock trading involves significant risk of capital loss. No signals or backtests generated by this system represent guaranteed returns or financial advice. Always consult a certified financial advisor before committing capital.
-
----
-*System Version: 2.1.0 | Built with Python, Streamlit, Scikit-Learn, and Plotly*
+### Regulatory & Investment Disclaimer
+**MarketMind is strictly an educational and algorithmic research terminal.** It does not constitute investment, financial, legal, or tax advice. Stock market investing involves substantial risk of capital loss, and historical model backtests do not guarantee future performance.

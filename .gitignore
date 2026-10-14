@@ -170,3 +170,7 @@ scripts/train_rank_model.py
 scripts/prepare_basket_data.py
 scripts/train_basket_model.py
 scripts/update_tracker.py
+scripts/train_all.py
+BASKET_BUILDER_REPORT.md
+data/indian_stock_categories.csv
+data/indian_stock_categories.csv

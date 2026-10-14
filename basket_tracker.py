@@ -40,18 +40,30 @@ def save_paper_basket(
 
     records = []
     for _, row in basket_df.iterrows():
+        price_val = row.get("Current_Price", row.get("Entry_Price", row.get("Close", 0.0)))
+        try:
+            price_val = float(price_val)
+        except Exception:
+            price_val = 0.0
+
+        stop_val = row.get("Stop_Loss", price_val * 0.95 if price_val > 0 else 0.0)
+        try:
+            stop_val = float(stop_val)
+        except Exception:
+            stop_val = 0.0
+
         records.append({
             "Basket_ID": basket_id,
             "Timestamp": now_str,
             "Date": datetime.now().strftime("%Y-%m-%d"),
             "Symbol": row["Symbol"],
             "Company": row.get("Company", row["Symbol"]),
-            "Entry_Price": float(row["Current_Price"]),
+            "Entry_Price": price_val,
             "Shares_Qty": int(row.get("Shares_Qty", 0)),
             "Weight_Pct": float(row.get("Weight_Pct", 6.67)),
             "Allocated_Capital": float(row.get("Actual_Allocation", row.get("Allocated_Capital", 0.0))),
             "Prob_Beat_Index": float(row.get("Prob_Beat_Index", 0.5)),
-            "Stop_Loss": float(row.get("Stop_Loss", row["Current_Price"] * 0.95)),
+            "Stop_Loss": stop_val,
             "Key_Reasons": str(row.get("Key_Reasons", "")),
         })
 

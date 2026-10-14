@@ -1,95 +1,500 @@
-Ticker,Volatility,Max_Drawdown,Category,Risk_Level,Capital_Safety
-RELIANCE,0.1995,-0.1807,Growth (Moderate),Medium,Medium
-TCS,0.2188,-0.3448,Growth (Moderate),Medium,Medium
-HDFCBANK,0.1883,-0.2778,Growth (Moderate),Medium,Medium
-ICICIBANK,0.1788,-0.1837,Conservative (Blue Chip),Very Low,High
-INFY,0.2553,-0.352,Growth (Moderate),Medium,Medium
-HINDUNILVR,0.201,-0.2318,Growth (Moderate),Medium,Medium
-ITC,0.19,-0.3246,Growth (Moderate),Medium,Medium
-SBIN,0.2216,-0.2211,Growth (Moderate),Medium,Medium
-BHARTIARTL,0.1936,-0.1877,Growth (Moderate),Medium,Medium
-KOTAKBANK,0.2108,-0.2065,Growth (Moderate),Medium,Medium
-LT,0.2428,-0.2435,Growth (Moderate),Medium,Medium
-AXISBANK,0.2337,-0.1723,Growth (Moderate),Medium,Medium
-ASIANPAINT,0.2368,-0.2854,Growth (Moderate),Medium,Medium
-MARUTI,0.2295,-0.2883,Growth (Moderate),Medium,Medium
-TITAN,0.2282,-0.1127,Growth (Moderate),Medium,Medium
-BAJFINANCE,0.2867,-0.2674,Growth (Moderate),Medium,Medium
-SUNPHARMA,0.1971,-0.1323,Growth (Moderate),Medium,Medium
-ADANIENT,0.3359,-0.3428,Aggressive (Volatile),High,Low
-TATASTEEL,0.2669,-0.1485,Growth (Moderate),Medium,Medium
-M&M,0.2692,-0.2291,Growth (Moderate),Medium,Medium
-POWERGRID,0.1979,-0.1382,Growth (Moderate),Medium,Medium
-NTPC,0.1783,-0.0791,Conservative (Blue Chip),Very Low,High
-HCLTECH,0.2469,-0.3377,Growth (Moderate),Medium,Medium
-ONGC,0.2185,-0.0944,Growth (Moderate),Medium,Medium
-ADANIPORTS,0.2724,-0.1698,Growth (Moderate),Medium,Medium
-WIPRO,0.2305,-0.2945,Growth (Moderate),Medium,Medium
-COALINDIA,0.215,-0.1027,Growth (Moderate),Medium,Medium
-JSWSTEEL,0.2341,-0.1335,Growth (Moderate),Medium,Medium
-ULTRACEMCO,0.2229,-0.2061,Growth (Moderate),Medium,Medium
-GRASIM,0.2194,-0.1445,Growth (Moderate),Medium,Medium
-BAJAJFINSV,0.2204,-0.2503,Growth (Moderate),Medium,Medium
-HINDALCO,0.2646,-0.1795,Growth (Moderate),Medium,Medium
-NESTLEIND,0.2033,-0.1196,Growth (Moderate),Medium,Medium
-TECHM,0.2521,-0.2469,Growth (Moderate),Medium,Medium
-SBILIFE,0.1928,-0.1603,Growth (Moderate),Medium,Medium
-BRITANNIA,0.2012,-0.1559,Growth (Moderate),Medium,Medium
-EICHERMOT,0.2478,-0.1958,Growth (Moderate),Medium,Medium
-HDFCLIFE,0.2109,-0.3048,Growth (Moderate),Medium,Medium
-ADANIPOWER,0.4211,-0.2215,Aggressive (Volatile),High,Low
-INDUSINDBK,0.2824,-0.2199,Growth (Moderate),Medium,Medium
-TATACONSUM,0.2161,-0.1631,Growth (Moderate),Medium,Medium
-CIPLA,0.2094,-0.2832,Growth (Moderate),Medium,Medium
-BPCL,0.2892,-0.3013,Growth (Moderate),Medium,Medium
-DRREDDY,0.2308,-0.1454,Growth (Moderate),Medium,Medium
-APOLLOHOSP,0.1995,-0.1521,Growth (Moderate),Medium,Medium
-DIVISLAB,0.2206,-0.1816,Growth (Moderate),Medium,Medium
-BAJAJ-AUTO,0.2202,-0.1337,Growth (Moderate),Medium,Medium
-HEROMOTOCO,0.2658,-0.2042,Growth (Moderate),Medium,Medium
-HAL,0.2679,-0.3099,Growth (Moderate),Medium,Medium
-BEL,0.2539,-0.1563,Growth (Moderate),Medium,Medium
-JIOFIN,0.2712,-0.3278,Growth (Moderate),Medium,Medium
-PFC,0.27,-0.2076,Growth (Moderate),Medium,Medium
-RECLTD,0.2591,-0.2455,Growth (Moderate),Medium,Medium
-IRFC,0.2829,-0.3951,Growth (Moderate),Medium,Medium
-VBL,0.2896,-0.268,Growth (Moderate),Medium,Medium
-TRENT,0.3255,-0.4703,Aggressive (Volatile),High,Low
-DLF,0.2739,-0.4232,Growth (Moderate),Medium,Medium
-CHOLAFIN,0.3142,-0.2491,Aggressive (Volatile),High,Low
-SIEMENS,0.2943,-0.158,Growth (Moderate),Medium,Medium
-ABB,0.2775,-0.2437,Growth (Moderate),Medium,Medium
-HAVELLS,0.2291,-0.2667,Growth (Moderate),Medium,Medium
-TVSMOTOR,0.2578,-0.1667,Growth (Moderate),Medium,Medium
-PNB,0.2725,-0.2483,Growth (Moderate),Medium,Medium
-CANBK,0.282,-0.2232,Growth (Moderate),Medium,Medium
-IDFCFIRSTB,0.3152,-0.3163,Aggressive (Volatile),High,Low
-YESBANK,0.2912,-0.2821,Growth (Moderate),Medium,Medium
-FEDERALBNK,0.2453,-0.1517,Growth (Moderate),Medium,Medium
-BANDHANBNK,0.3668,-0.2791,Aggressive (Volatile),High,Low
-LUPIN,0.2053,-0.0994,Growth (Moderate),Medium,Medium
-AUROPHARMA,0.2624,-0.1429,Growth (Moderate),Medium,Medium
-BIOCON,0.2606,-0.1934,Growth (Moderate),Medium,Medium
-PAGEIND,0.2308,-0.3829,Growth (Moderate),Medium,Medium
-TATAELXSI,0.2909,-0.4002,Growth (Moderate),Medium,Medium
-KPITTECH,0.3272,-0.5523,Aggressive (Volatile),High,Low
-PERSISTENT,0.3142,-0.3074,Aggressive (Volatile),High,Low
-MPHASIS,0.2755,-0.3177,Growth (Moderate),Medium,Medium
-AMBUJACEM,0.2563,-0.3629,Growth (Moderate),Medium,Medium
-ACC,0.2109,-0.3732,Growth (Moderate),Medium,Medium
-DALBHARAT,0.2648,-0.3094,Growth (Moderate),Medium,Medium
-SHREECEM,0.2055,-0.2954,Growth (Moderate),Medium,Medium
-POLYCAB,0.2867,-0.2108,Growth (Moderate),Medium,Medium
-KEI,0.3039,-0.2335,Aggressive (Volatile),High,Low
-CUMMINSIND,0.253,-0.1461,Growth (Moderate),Medium,Medium
-BHEL,0.3456,-0.2182,Aggressive (Volatile),High,Low
-RVNL,0.3415,-0.4169,Aggressive (Volatile),High,Low
-IRCON,0.4061,-0.4701,Aggressive (Volatile),High,Low
-PAYTM,0.3604,-0.2989,Aggressive (Volatile),High,Low
-NYKAA,0.2831,-0.1637,Growth (Moderate),Medium,Medium
-POLICYBZR,0.3233,-0.271,Aggressive (Volatile),High,Low
-DELHIVERY,0.2999,-0.2193,Growth (Moderate),Medium,Medium
-IDEA,0.4978,-0.2927,Aggressive (Volatile),High,Low
-SUZLON,0.33,-0.4466,Aggressive (Volatile),High,Low
-NHPC,0.2323,-0.1864,Growth (Moderate),Medium,Medium
-SJVN,0.3345,-0.3797,Aggressive (Volatile),High,Low
+Ticker,Company_Name,Industry,Volatility,Max_Drawdown,Category,Risk_Level,Capital_Safety
+360ONE,360 ONE WAM Ltd.,Financial Services,0.283,-0.2257,Growth (Moderate),Medium,Medium
+AADHARHFC,Aadhar Housing Finance Ltd.,Financial Services,0.267,-0.2228,Growth (Moderate),Medium,Medium
+AARTIIND,Aarti Industries Ltd.,Chemicals,0.3862,-0.1661,Aggressive (Volatile),High,Low
+AAVAS,Aavas Financiers Ltd.,Financial Services,0.3059,-0.3815,Growth (Moderate),Medium,Medium
+ABB,ABB India Ltd.,Capital Goods,0.3087,-0.1656,Growth (Moderate),Medium,Medium
+ABBOTINDIA,Abbott India Ltd.,Healthcare,0.2026,-0.1677,Growth (Moderate),Medium,Medium
+ABCAPITAL,Aditya Birla Capital Ltd.,Financial Services,0.3236,-0.1972,Aggressive (Volatile),High,Low
+ABDL,Allied Blenders and Distillers Ltd.,Fast Moving Consumer Goods,0.4137,-0.4382,Aggressive (Volatile),High,Low
+ABREL,Aditya Birla Real Estate Ltd.,Realty,0.3913,-0.4606,Aggressive (Volatile),High,Low
+ABSLAMC,Aditya Birla Sun Life AMC Ltd.,Financial Services,0.3756,-0.1828,Aggressive (Volatile),High,Low
+ACC,ACC Ltd.,Construction Materials,0.2277,-0.4061,Growth (Moderate),Medium,Medium
+ACE,Action Construction Equipment Ltd.,Capital Goods,0.3388,-0.3295,Aggressive (Volatile),High,Low
+ACMESOLAR,ACME Solar Holdings Ltd.,Power,0.3788,-0.3148,Aggressive (Volatile),High,Low
+ACUTAAS,Acutaas Chemicals Ltd.,Healthcare,0.4505,-0.1753,Aggressive (Volatile),High,Low
+ADANIENSOL,Adani Energy Solutions Ltd.,Power,0.3957,-0.2814,Aggressive (Volatile),High,Low
+ADANIENT,Adani Enterprises Ltd.,Metals & Mining,0.368,-0.3166,Aggressive (Volatile),High,Low
+ADANIGREEN,Adani Green Energy Ltd.,Power,0.4251,-0.3222,Aggressive (Volatile),High,Low
+ADANIPORTS,Adani Ports and Special Economic Zone Ltd.,Services,0.2965,-0.1698,Growth (Moderate),Medium,Medium
+ADANIPOWER,Adani Power Ltd.,Power,0.3498,-0.2529,Aggressive (Volatile),High,Low
+AEGISLOG,Aegis Logistics Ltd.,Oil Gas & Consumable Fuels,0.4653,-0.3327,Aggressive (Volatile),High,Low
+AEGISVOPAK,Aegis Vopak Terminals Ltd.,Oil Gas & Consumable Fuels,0.4696,-0.441,Aggressive (Volatile),High,Low
+AETHER,Aether Industries Ltd.,Chemicals,0.4095,-0.1603,Aggressive (Volatile),High,Low
+AFCONS,Afcons Infrastructure Ltd.,Construction,0.3312,-0.4778,Aggressive (Volatile),High,Low
+AFFLE,Affle 3i Ltd.,Information Technology,0.3329,-0.3551,Aggressive (Volatile),High,Low
+AIAENG,AIA Engineering Ltd.,Capital Goods,0.3055,-0.2617,Growth (Moderate),Medium,Medium
+AIIL,Authum Investment & Infrastructure Ltd.,Financial Services,0.5088,-0.3932,Speculative (High Risk),Extreme,Very Low
+AJANTPHARM,Ajanta Pharmaceuticals Ltd.,Healthcare,0.2592,-0.1316,Growth (Moderate),Medium,Medium
+ALKEM,Alkem Laboratories Ltd.,Healthcare,0.2189,-0.1277,Growth (Moderate),Medium,Medium
+AMBER,Amber Enterprises India Ltd.,Consumer Durables,0.4059,-0.3538,Aggressive (Volatile),High,Low
+AMBUJACEM,Ambuja Cements Ltd.,Construction Materials,0.2799,-0.4063,Growth (Moderate),Medium,Medium
+ANANDRATHI,Anand Rathi Wealth Ltd.,Financial Services,0.2189,-0.1198,Growth (Moderate),Medium,Medium
+ANANTRAJ,Anant Raj Ltd.,Realty,0.4486,-0.4485,Aggressive (Volatile),High,Low
+ANGELONE,Angel One Ltd.,Financial Services,0.4084,-0.2451,Aggressive (Volatile),High,Low
+ANTHEM,Anthem Biosciences Ltd.,Healthcare,0.2948,-0.2602,Growth (Moderate),Medium,Medium
+ANURAS,Anupam Rasayan India Ltd.,Chemicals,0.2637,-0.2012,Growth (Moderate),Medium,Medium
+APARINDS,Apar Industries Ltd.,Capital Goods,0.4661,-0.2638,Aggressive (Volatile),High,Low
+APLAPOLLO,APL Apollo Tubes Ltd.,Capital Goods,0.2868,-0.2273,Growth (Moderate),Medium,Medium
+APOLLOHOSP,Apollo Hospitals Enterprise Ltd.,Healthcare,0.201,-0.1547,Growth (Moderate),Medium,Medium
+APOLLOTYRE,Apollo Tyres Ltd.,Automobile and Auto Components,0.277,-0.3027,Growth (Moderate),Medium,Medium
+APTUS,Aptus Value Housing Finance India Ltd.,Financial Services,0.3285,-0.3938,Aggressive (Volatile),High,Low
+ARE&M,Amara Raja Energy & Mobility Ltd.,Automobile and Auto Components,0.3192,-0.3347,Growth (Moderate),Medium,Medium
+ASAHIINDIA,Asahi India Glass Ltd.,Automobile and Auto Components,0.3307,-0.2644,Aggressive (Volatile),High,Low
+ASHOKLEY,Ashok Leyland Ltd.,Capital Goods,0.3682,-0.3349,Aggressive (Volatile),High,Low
+ASIANPAINT,Asian Paints Ltd.,Consumer Durables,0.2439,-0.2854,Growth (Moderate),Medium,Medium
+ASTERDM,Aster DM Quality Care Ltd.,Healthcare,0.2859,-0.2559,Growth (Moderate),Medium,Medium
+ASTRAL,Astral Ltd.,Capital Goods,0.3068,-0.2458,Growth (Moderate),Medium,Medium
+ATGL,Adani Total Gas Ltd.,Oil Gas & Consumable Fuels,0.4311,-0.3044,Aggressive (Volatile),High,Low
+ATHERENERG,Ather Energy Ltd.,Automobile and Auto Components,0.4823,-0.2148,Aggressive (Volatile),High,Low
+ATUL,Atul Ltd.,Chemicals,0.2528,-0.1721,Growth (Moderate),Medium,Medium
+AUBANK,AU Small Finance Bank Ltd.,Financial Services,0.3033,-0.1816,Growth (Moderate),Medium,Medium
+AUROPHARMA,Aurobindo Pharma Ltd.,Healthcare,0.2614,-0.097,Growth (Moderate),Medium,Medium
+AVANTIFEED,Avanti Feeds Ltd.,Fast Moving Consumer Goods,0.5358,-0.53,Speculative (High Risk),Extreme,Very Low
+AWL,AWL Agri Business Ltd.,Fast Moving Consumer Goods,0.273,-0.3793,Growth (Moderate),Medium,Medium
+AXISBANK,Axis Bank Ltd.,Financial Services,0.2454,-0.1723,Growth (Moderate),Medium,Medium
+AZAD,Azad Engineering Ltd.,Capital Goods,0.4327,-0.2156,Aggressive (Volatile),High,Low
+BAJAJ-AUTO,Bajaj Auto Ltd.,Automobile and Auto Components,0.2456,-0.2204,Growth (Moderate),Medium,Medium
+BAJAJFINSV,Bajaj Finserv Ltd.,Financial Services,0.2457,-0.2503,Growth (Moderate),Medium,Medium
+BAJAJHFL,Bajaj Housing Finance Ltd.,Financial Services,0.2205,-0.3461,Growth (Moderate),Medium,Medium
+BAJAJHLDNG,Bajaj Holdings & Investment Ltd.,Financial Services,0.2848,-0.3346,Growth (Moderate),Medium,Medium
+BAJFINANCE,Bajaj Finance Ltd.,Financial Services,0.3075,-0.2674,Growth (Moderate),Medium,Medium
+BALKRISIND,Balkrishna Industries Ltd.,Automobile and Auto Components,0.342,-0.2733,Aggressive (Volatile),High,Low
+BALRAMCHIN,Balrampur Chini Mills Ltd.,Fast Moving Consumer Goods,0.4065,-0.1673,Aggressive (Volatile),High,Low
+BANDHANBNK,Bandhan Bank Ltd.,Financial Services,0.4333,-0.2761,Aggressive (Volatile),High,Low
+BANKBARODA,Bank of Baroda,Financial Services,0.2753,-0.2761,Growth (Moderate),Medium,Medium
+BANKINDIA,Bank of India,Financial Services,0.3273,-0.2454,Aggressive (Volatile),High,Low
+BATAINDIA,Bata India Ltd.,Consumer Durables,0.3053,-0.5022,Growth (Moderate),Medium,Medium
+BBOX,Black Box Ltd.,Information Technology,0.4576,-0.3385,Aggressive (Volatile),High,Low
+BDL,Bharat Dynamics Ltd.,Capital Goods,0.3849,-0.3465,Aggressive (Volatile),High,Low
+BEL,Bharat Electronics Ltd.,Capital Goods,0.2535,-0.2149,Growth (Moderate),Medium,Medium
+BELRISE,Belrise Industries Ltd.,Automobile and Auto Components,0.3638,-0.1467,Aggressive (Volatile),High,Low
+BEML,BEML Ltd.,Capital Goods,0.3869,-0.3865,Aggressive (Volatile),High,Low
+BERGEPAINT,Berger Paints India Ltd.,Consumer Durables,0.2803,-0.3145,Growth (Moderate),Medium,Medium
+BHARATCOAL,Bharat Coking Coal Ltd.,Oil Gas & Consumable Fuels,0.4098,-0.2689,Aggressive (Volatile),High,Low
+BHARATFORG,Bharat Forge Ltd.,Automobile and Auto Components,0.2981,-0.2095,Growth (Moderate),Medium,Medium
+BHARTIARTL,Bharti Airtel Ltd.,Telecommunication,0.2095,-0.1877,Growth (Moderate),Medium,Medium
+BHARTIHEXA,Bharti Hexacom Ltd.,Telecommunication,0.2916,-0.2716,Growth (Moderate),Medium,Medium
+BHEL,Bharat Heavy Electricals Ltd.,Capital Goods,0.3706,-0.2011,Aggressive (Volatile),High,Low
+BIOCON,Biocon Ltd.,Healthcare,0.2524,-0.2072,Growth (Moderate),Medium,Medium
+BIRET,Brookfield India Real Estate Trust,Realty,0.1605,-0.1376,Conservative (Blue Chip),Very Low,High
+BLS,BLS International Services Ltd.,Consumer Services,0.4767,-0.3822,Aggressive (Volatile),High,Low
+BLUESTARCO,Blue Star Ltd.,Consumer Durables,0.328,-0.2798,Aggressive (Volatile),High,Low
+BOSCHLTD,Bosch Ltd.,Automobile and Auto Components,0.2941,-0.2708,Growth (Moderate),Medium,Medium
+BPCL,Bharat Petroleum Corporation Ltd.,Oil Gas & Consumable Fuels,0.2952,-0.3013,Growth (Moderate),Medium,Medium
+BRIGADE,Brigade Enterprises Ltd.,Realty,0.3755,-0.3905,Aggressive (Volatile),High,Low
+BRITANNIA,Britannia Industries Ltd.,Fast Moving Consumer Goods,0.1947,-0.2199,Conservative (Blue Chip),Very Low,High
+BSE,BSE Ltd.,Financial Services,0.3775,-0.3064,Aggressive (Volatile),High,Low
+BSOFT,Birlasoft Ltd.,Information Technology,0.3851,-0.4153,Aggressive (Volatile),High,Low
+CAMS,Computer Age Management Services Ltd.,Financial Services,0.2987,-0.2209,Growth (Moderate),Medium,Medium
+CANBK,Canara Bank,Financial Services,0.2825,-0.2373,Growth (Moderate),Medium,Medium
+CANFINHOME,Can Fin Homes Ltd.,Financial Services,0.2635,-0.2449,Growth (Moderate),Medium,Medium
+CANHLIFE,Canara HSBC Life Insurance Company Ltd.,Financial Services,0.3039,-0.1333,Growth (Moderate),Medium,Medium
+CAPLIPOINT,Caplin Point Laboratories Ltd.,Healthcare,0.3412,-0.2684,Aggressive (Volatile),High,Low
+CARBORUNIV,Carborundum Universal Ltd.,Capital Goods,0.3501,-0.2003,Aggressive (Volatile),High,Low
+CARTRADE,Cartrade Tech Ltd.,Consumer Services,0.5488,-0.5032,Speculative (High Risk),Extreme,Very Low
+CASTROLIND,Castrol India Ltd.,Oil Gas & Consumable Fuels,0.1334,-0.1245,Conservative (Blue Chip),Very Low,High
+CCL,CCL Products (I) Ltd.,Fast Moving Consumer Goods,0.3176,-0.1795,Growth (Moderate),Medium,Medium
+CDSL,Central Depository Services (India) Ltd.,Financial Services,0.3154,-0.3237,Growth (Moderate),Medium,Medium
+CEATLTD,Ceat Ltd.,Automobile and Auto Components,0.3778,-0.2781,Aggressive (Volatile),High,Low
+CEMPRO,Cemindia Projects Ltd.,Construction,0.524,-0.4092,Speculative (High Risk),Extreme,Very Low
+CENTRALBK,Central Bank of India,Financial Services,0.2815,-0.2556,Growth (Moderate),Medium,Medium
+CESC,CESC Ltd.,Power,0.2823,-0.3282,Growth (Moderate),Medium,Medium
+CGCL,Capri Global Capital Ltd.,Financial Services,0.3517,-0.2731,Aggressive (Volatile),High,Low
+CGPOWER,CG Power and Industrial Solutions Ltd.,Capital Goods,0.3477,-0.3028,Aggressive (Volatile),High,Low
+CHAMBLFERT,Chambal Fertilizers & Chemicals Ltd.,Chemicals,0.2665,-0.2583,Growth (Moderate),Medium,Medium
+CHENNPETRO,Chennai Petroleum Corporation Ltd.,Oil Gas & Consumable Fuels,0.5452,-0.2862,Speculative (High Risk),Extreme,Very Low
+CHOICEIN,Choice International Ltd.,Financial Services,0.3202,-0.3132,Aggressive (Volatile),High,Low
+CHOLAFIN,Cholamandalam Investment and Finance Company Ltd.,Financial Services,0.3318,-0.2491,Aggressive (Volatile),High,Low
+CHOLAHLDNG,Cholamandalam Financial Holdings Ltd.,Financial Services,0.3565,-0.3295,Aggressive (Volatile),High,Low
+CIEINDIA,CIE Automotive India Ltd.,Automobile and Auto Components,0.3041,-0.2437,Growth (Moderate),Medium,Medium
+CIPLA,Cipla Ltd.,Healthcare,0.211,-0.2832,Growth (Moderate),Medium,Medium
+CLEAN,Clean Science and Technology Ltd.,Chemicals,0.3242,-0.3863,Aggressive (Volatile),High,Low
+CLEANMAX,Clean Max Enviro Energy Solutions Ltd.,Power,0.5347,-0.2086,Speculative (High Risk),Extreme,Very Low
+CMPDI,Central Mine Planning & Design Institute Ltd.,Services,0.4778,-0.2596,Aggressive (Volatile),High,Low
+COALINDIA,Coal India Ltd.,Oil Gas & Consumable Fuels,0.2333,-0.1584,Growth (Moderate),Medium,Medium
+COCHINSHIP,Cochin Shipyard Ltd.,Capital Goods,0.3774,-0.3531,Aggressive (Volatile),High,Low
+COFORGE,Coforge Ltd.,Information Technology,0.3879,-0.4558,Aggressive (Volatile),High,Low
+COHANCE,Cohance Lifesciences Ltd.,Healthcare,0.5063,-0.6906,Speculative (High Risk),Extreme,Very Low
+COLPAL,Colgate Palmolive (India) Ltd.,Fast Moving Consumer Goods,0.2513,-0.2352,Growth (Moderate),Medium,Medium
+CONCOR,Container Corporation of India Ltd.,Services,0.276,-0.2259,Growth (Moderate),Medium,Medium
+CONCORDBIO,Concord Biotech Ltd.,Healthcare,0.4075,-0.3762,Aggressive (Volatile),High,Low
+COROMANDEL,Coromandel International Ltd.,Chemicals,0.3029,-0.3016,Growth (Moderate),Medium,Medium
+CPPLUS,Aditya Infotech Ltd.,Capital Goods,0.4433,-0.2037,Aggressive (Volatile),High,Low
+CRAFTSMAN,Craftsman Automation Ltd.,Automobile and Auto Components,0.3663,-0.1937,Aggressive (Volatile),High,Low
+CREDITACC,CreditAccess Grameen Ltd.,Financial Services,0.3991,-0.2464,Aggressive (Volatile),High,Low
+CRISIL,CRISIL Ltd.,Financial Services,0.2705,-0.258,Growth (Moderate),Medium,Medium
+CROMPTON,Crompton Greaves Consumer Electricals Ltd.,Consumer Durables,0.3013,-0.3206,Growth (Moderate),Medium,Medium
+CUB,City Union Bank Ltd.,Financial Services,0.3941,-0.2328,Aggressive (Volatile),High,Low
+CUMMINSIND,Cummins India Ltd.,Capital Goods,0.2855,-0.2069,Growth (Moderate),Medium,Medium
+CUPID,Cupid Ltd.,Fast Moving Consumer Goods,0.593,-0.2825,Speculative (High Risk),Extreme,Very Low
+CYIENT,Cyient Ltd.,Information Technology,0.3496,-0.3768,Aggressive (Volatile),High,Low
+DABUR,Dabur India Ltd.,Fast Moving Consumer Goods,0.2309,-0.2836,Growth (Moderate),Medium,Medium
+DALBHARAT,Dalmia Bharat Ltd.,Construction Materials,0.2821,-0.289,Growth (Moderate),Medium,Medium
+DATAPATTNS,Data Patterns (India) Ltd.,Capital Goods,0.4987,-0.2992,Aggressive (Volatile),High,Low
+DEEPAKFERT,Deepak Fertilisers & Petrochemicals Corp. Ltd.,Chemicals,0.4185,-0.438,Aggressive (Volatile),High,Low
+DEEPAKNTR,Deepak Nitrite Ltd.,Chemicals,0.2951,-0.3021,Growth (Moderate),Medium,Medium
+DELHIVERY,Delhivery Ltd.,Services,0.3074,-0.237,Growth (Moderate),Medium,Medium
+DEVYANI,Devyani International Ltd.,Consumer Services,0.393,-0.4363,Aggressive (Volatile),High,Low
+DIVISLAB,Divi's Laboratories Ltd.,Healthcare,0.242,-0.1544,Growth (Moderate),Medium,Medium
+DIXON,Dixon Technologies (India) Ltd.,Consumer Durables,0.3886,-0.4455,Aggressive (Volatile),High,Low
+DLF,DLF Ltd.,Realty,0.305,-0.3533,Growth (Moderate),Medium,Medium
+DMART,Avenue Supermarts Ltd.,Consumer Services,0.2509,-0.2691,Growth (Moderate),Medium,Medium
+DOMS,DOMS Industries Ltd.,Fast Moving Consumer Goods,0.2606,-0.2334,Growth (Moderate),Medium,Medium
+DRREDDY,Dr. Reddy's Laboratories Ltd.,Healthcare,0.2393,-0.1693,Growth (Moderate),Medium,Medium
+ECLERX,eClerx Services Ltd.,Services,0.4659,-0.4644,Aggressive (Volatile),High,Low
+EICHERMOT,Eicher Motors Ltd.,Automobile and Auto Components,0.2708,-0.1958,Growth (Moderate),Medium,Medium
+EIDPARRY,E.I.D. Parry (India) Ltd.,Fast Moving Consumer Goods,0.2717,-0.381,Growth (Moderate),Medium,Medium
+EIHOTEL,EIH Ltd.,Consumer Services,0.2909,-0.3146,Growth (Moderate),Medium,Medium
+ELECON,Elecon Engineering Co. Ltd.,Capital Goods,0.4652,-0.427,Aggressive (Volatile),High,Low
+ELGIEQUIP,Elgi Equipments Ltd.,Capital Goods,0.332,-0.1926,Aggressive (Volatile),High,Low
+EMAMILTD,Emami Ltd.,Fast Moving Consumer Goods,0.2523,-0.3353,Growth (Moderate),Medium,Medium
+EMBASSY,EMBASSY OFFICE PARKS REIT,Realty,0.1704,-0.099,Conservative (Blue Chip),Very Low,High
+EMCURE,Emcure Pharmaceuticals Ltd.,Healthcare,0.3195,-0.0986,Growth (Moderate),Medium,Medium
+EMMVEE,Emmvee Photovoltaic Power Ltd.,Capital Goods,0.5171,-0.2866,Speculative (High Risk),Extreme,Very Low
+ENDURANCE,Endurance Technologies Ltd.,Automobile and Auto Components,0.3076,-0.2578,Growth (Moderate),Medium,Medium
+ENGINERSIN,Engineers India Ltd.,Construction,0.4422,-0.2027,Aggressive (Volatile),High,Low
+ENRIN,Siemens Energy India Ltd.,Capital Goods,0.3919,-0.3653,Aggressive (Volatile),High,Low
+ESCORTS,Escorts Kubota Ltd.,Capital Goods,0.3034,-0.3157,Growth (Moderate),Medium,Medium
+ETERNAL,Eternal Ltd.,Consumer Services,0.3333,-0.3913,Aggressive (Volatile),High,Low
+EXIDEIND,Exide Industries Ltd.,Automobile and Auto Components,0.2956,-0.2853,Growth (Moderate),Medium,Medium
+FACT,Fertilisers and Chemicals Travancore Ltd.,Chemicals,0.4127,-0.2807,Aggressive (Volatile),High,Low
+FEDERALBNK,Federal Bank Ltd.,Financial Services,0.2647,-0.1517,Growth (Moderate),Medium,Medium
+FINCABLES,Finolex Cables Ltd.,Capital Goods,0.4415,-0.1985,Aggressive (Volatile),High,Low
+FIRSTCRY,Brainbees Solutions Ltd.,Consumer Services,0.4086,-0.554,Aggressive (Volatile),High,Low
+FIVESTAR,Five-Star Business Finance Ltd.,Financial Services,0.4099,-0.4738,Aggressive (Volatile),High,Low
+FLUOROCHEM,Gujarat Fluorochemicals Ltd.,Chemicals,0.3093,-0.2136,Growth (Moderate),Medium,Medium
+FORCEMOT,Force Motors Ltd.,Automobile and Auto Components,0.4492,-0.3522,Aggressive (Volatile),High,Low
+FORTIS,Fortis Healthcare Ltd.,Healthcare,0.2617,-0.3103,Growth (Moderate),Medium,Medium
+FRACTAL,Fractal Analytics Ltd.,Information Technology,0.4647,-0.3639,Aggressive (Volatile),High,Low
+FSL,Firstsource Solutions Ltd.,Services,0.5019,-0.4312,Speculative (High Risk),Extreme,Very Low
+GABRIEL,Gabriel India Ltd.,Automobile and Auto Components,0.5052,-0.3736,Speculative (High Risk),Extreme,Very Low
+GAIL,GAIL (India) Ltd.,Oil Gas & Consumable Fuels,0.2516,-0.2465,Growth (Moderate),Medium,Medium
+GALLANTT,Gallantt Ispat Ltd.,Capital Goods,0.5688,-0.4553,Speculative (High Risk),Extreme,Very Low
+GESHIP,Great Eastern Shipping Co. Ltd.,Services,0.3432,-0.2506,Aggressive (Volatile),High,Low
+GICRE,General Insurance Corporation of India,Financial Services,0.2398,-0.2157,Growth (Moderate),Medium,Medium
+GILLETTE,Gillette India Ltd.,Fast Moving Consumer Goods,0.2273,-0.2559,Growth (Moderate),Medium,Medium
+GLAND,Gland Pharma Ltd.,Healthcare,0.3391,-0.1903,Aggressive (Volatile),High,Low
+GLAXO,Glaxosmithkline Pharmaceuticals Ltd.,Healthcare,0.2568,-0.2207,Growth (Moderate),Medium,Medium
+GLENMARK,Glenmark Pharmaceuticals Ltd.,Healthcare,0.2772,-0.1275,Growth (Moderate),Medium,Medium
+GMDCLTD,Gujarat Mineral Development Corporation Ltd.,Metals & Mining,0.4704,-0.3705,Aggressive (Volatile),High,Low
+GMRAIRPORT,GMR Airports Ltd.,Services,0.3174,-0.2366,Growth (Moderate),Medium,Medium
+GODFRYPHLP,Godfrey Phillips India Ltd.,Fast Moving Consumer Goods,0.4695,-0.4773,Aggressive (Volatile),High,Low
+GODREJCP,Godrej Consumer Products Ltd.,Fast Moving Consumer Goods,0.2639,-0.3226,Growth (Moderate),Medium,Medium
+GODREJIND,Godrej Industries Ltd.,Diversified,0.4172,-0.3362,Aggressive (Volatile),High,Low
+GODREJPROP,Godrej Properties Ltd.,Realty,0.3576,-0.3659,Aggressive (Volatile),High,Low
+GPIL,Godawari Power & Ispat Ltd.,Capital Goods,0.3498,-0.3249,Aggressive (Volatile),High,Low
+GRANULES,Granules India Ltd.,Healthcare,0.2927,-0.1319,Growth (Moderate),Medium,Medium
+GRAPHITE,Graphite India Ltd.,Capital Goods,0.4397,-0.2519,Aggressive (Volatile),High,Low
+GRASIM,Grasim Industries Ltd.,Construction Materials,0.234,-0.1549,Growth (Moderate),Medium,Medium
+GRAVITA,Gravita India Ltd.,Metals & Mining,0.3627,-0.3094,Aggressive (Volatile),High,Low
+GROWW,Billionbrains Garage Ventures Ltd.,Financial Services,0.4919,-0.2429,Aggressive (Volatile),High,Low
+GRSE,Garden Reach Shipbuilders & Engineers Ltd.,Capital Goods,0.4319,-0.3472,Aggressive (Volatile),High,Low
+GVT&D,GE Vernova T&D India Ltd.,Capital Goods,0.4456,-0.2681,Aggressive (Volatile),High,Low
+HAL,Hindustan Aeronautics Ltd.,Capital Goods,0.2841,-0.2793,Growth (Moderate),Medium,Medium
+HAVELLS,Havells India Ltd.,Consumer Durables,0.2478,-0.3215,Growth (Moderate),Medium,Medium
+HBLENGINE,HBL Engineering Ltd.,Capital Goods,0.4444,-0.439,Aggressive (Volatile),High,Low
+HCLTECH,HCL Technologies Ltd.,Information Technology,0.3051,-0.3906,Growth (Moderate),Medium,Medium
+HDBFS,HDB Financial Services Ltd.,Financial Services,0.2619,-0.2755,Growth (Moderate),Medium,Medium
+HDFCAMC,HDFC Asset Management Company Ltd.,Financial Services,0.3199,-0.2362,Growth (Moderate),Medium,Medium
+HDFCBANK,HDFC Bank Ltd.,Financial Services,0.219,-0.3081,Growth (Moderate),Medium,Medium
+HDFCLIFE,HDFC Life Insurance Company Ltd.,Financial Services,0.2444,-0.345,Growth (Moderate),Medium,Medium
+HEGAM,HEG Advanced Materials Ltd.,Capital Goods,0.7694,-0.7091,Speculative (High Risk),Extreme,Very Low
+HEROMOTOCO,Hero MotoCorp Ltd.,Automobile and Auto Components,0.2643,-0.2334,Growth (Moderate),Medium,Medium
+HEXT,Hexaware Technologies Ltd.,Information Technology,0.3889,-0.4865,Aggressive (Volatile),High,Low
+HFCL,HFCL Ltd.,Telecommunication,0.5132,-0.2216,Speculative (High Risk),Extreme,Very Low
+HINDALCO,Hindalco Industries Ltd.,Metals & Mining,0.2887,-0.2217,Growth (Moderate),Medium,Medium
+HINDCOPPER,Hindustan Copper Ltd.,Metals & Mining,0.5435,-0.4081,Speculative (High Risk),Extreme,Very Low
+HINDPETRO,Hindustan Petroleum Corporation Ltd.,Oil Gas & Consumable Fuels,0.3489,-0.3605,Aggressive (Volatile),High,Low
+HINDUNILVR,Hindustan Unilever Ltd.,Fast Moving Consumer Goods,0.2199,-0.2821,Growth (Moderate),Medium,Medium
+HINDZINC,Hindustan Zinc Ltd.,Metals & Mining,0.3834,-0.3294,Aggressive (Volatile),High,Low
+HOMEFIRST,Home First Finance Company India Ltd.,Financial Services,0.3716,-0.2837,Aggressive (Volatile),High,Low
+HONASA,Honasa Consumer Ltd.,Fast Moving Consumer Goods,0.3303,-0.1437,Aggressive (Volatile),High,Low
+HONAUT,Honeywell Automation India Ltd.,Capital Goods,0.3074,-0.296,Growth (Moderate),Medium,Medium
+HSCL,Himadri Speciality Chemical Ltd.,Chemicals,0.3505,-0.2043,Aggressive (Volatile),High,Low
+HUDCO,Housing & Urban Development Corporation Ltd.,Financial Services,0.3162,-0.3359,Growth (Moderate),Medium,Medium
+HYUNDAI,Hyundai Motor India Ltd.,Automobile and Auto Components,0.2755,-0.3182,Growth (Moderate),Medium,Medium
+ICICIAMC,ICICI Prudential Asset Management Company Ltd.,Financial Services,0.328,-0.1663,Aggressive (Volatile),High,Low
+ICICIBANK,ICICI Bank Ltd.,Financial Services,0.1956,-0.1608,Conservative (Blue Chip),Very Low,High
+ICICIGI,ICICI Lombard General Insurance Company Ltd.,Financial Services,0.261,-0.2985,Growth (Moderate),Medium,Medium
+ICICIPRULI,ICICI Prudential Life Insurance Company Ltd.,Financial Services,0.2668,-0.3531,Growth (Moderate),Medium,Medium
+IDBI,IDBI Bank Ltd.,Financial Services,0.4771,-0.4699,Aggressive (Volatile),High,Low
+IDEA,Vodafone Idea Ltd.,Telecommunication,0.4549,-0.2927,Aggressive (Volatile),High,Low
+IDFCFIRSTB,IDFC First Bank Ltd.,Financial Services,0.3196,-0.3163,Growth (Moderate),Medium,Medium
+IEX,Indian Energy Exchange Ltd.,Financial Services,0.3175,-0.3109,Growth (Moderate),Medium,Medium
+IFCI,IFCI Ltd.,Financial Services,0.5575,-0.3754,Speculative (High Risk),Extreme,Very Low
+IGIL,International Gemological Institute Ltd.,Services,0.3588,-0.2086,Aggressive (Volatile),High,Low
+IGL,Indraprastha Gas Ltd.,Oil Gas & Consumable Fuels,0.2717,-0.3424,Growth (Moderate),Medium,Medium
+IIFL,IIFL Finance Ltd.,Financial Services,0.3937,-0.3649,Aggressive (Volatile),High,Low
+IKS,Inventurus Knowledge Solutions Ltd.,Information Technology,0.3452,-0.2748,Aggressive (Volatile),High,Low
+INDHOTEL,Indian Hotels Co. Ltd.,Consumer Services,0.2495,-0.2384,Growth (Moderate),Medium,Medium
+INDIACEM,India Cements Ltd.,Construction Materials,0.3225,-0.3844,Aggressive (Volatile),High,Low
+INDIAMART,Indiamart Intermesh Ltd.,Consumer Services,0.239,-0.3462,Growth (Moderate),Medium,Medium
+INDIANB,Indian Bank,Financial Services,0.3248,-0.2044,Aggressive (Volatile),High,Low
+INDIGO,InterGlobe Aviation Ltd.,Services,0.3413,-0.3354,Aggressive (Volatile),High,Low
+INDUSINDBK,IndusInd Bank Ltd.,Financial Services,0.2927,-0.2199,Growth (Moderate),Medium,Medium
+INDUSTOWER,Indus Towers Ltd.,Telecommunication,0.264,-0.2181,Growth (Moderate),Medium,Medium
+INFY,Infosys Ltd.,Information Technology,0.3057,-0.4043,Growth (Moderate),Medium,Medium
+INOXINDIA,INOX India Ltd.,Capital Goods,0.4263,-0.138,Aggressive (Volatile),High,Low
+INOXWIND,Inox Wind Ltd.,Capital Goods,0.4005,-0.603,Aggressive (Volatile),High,Low
+INTELLECT,Intellect Design Arena Ltd.,Information Technology,0.3805,-0.5219,Aggressive (Volatile),High,Low
+IOB,Indian Overseas Bank,Financial Services,0.2532,-0.253,Growth (Moderate),Medium,Medium
+IOC,Indian Oil Corporation Ltd.,Oil Gas & Consumable Fuels,0.2632,-0.3126,Growth (Moderate),Medium,Medium
+IPCALAB,Ipca Laboratories Ltd.,Healthcare,0.2948,-0.1099,Growth (Moderate),Medium,Medium
+IRB,IRB Infrastructure Developers Ltd.,Construction,0.2727,-0.2578,Growth (Moderate),Medium,Medium
+IRCON,IRCON International Ltd.,Construction,0.3997,-0.4307,Aggressive (Volatile),High,Low
+IRCTC,Indian Railway Catering And Tourism Corporation Ltd.,Consumer Services,0.2249,-0.3758,Growth (Moderate),Medium,Medium
+IREDA,Indian Renewable Energy Development Agency Ltd.,Financial Services,0.3052,-0.3248,Growth (Moderate),Medium,Medium
+IRFC,Indian Railway Finance Corporation Ltd.,Financial Services,0.291,-0.4381,Growth (Moderate),Medium,Medium
+ITC,ITC Ltd.,Fast Moving Consumer Goods,0.2213,-0.3657,Growth (Moderate),Medium,Medium
+ITCHOTELS,ITC Hotels Ltd.,Consumer Services,0.2984,-0.3852,Growth (Moderate),Medium,Medium
+ITI,ITI Ltd.,Telecommunication,0.3632,-0.335,Aggressive (Volatile),High,Low
+J&KBANK,Jammu & Kashmir Bank Ltd.,Financial Services,0.4068,-0.2967,Aggressive (Volatile),High,Low
+JAINREC,Jain Resource Recycling Ltd.,Metals & Mining,0.5272,-0.5227,Speculative (High Risk),Extreme,Very Low
+JBMA,JBM Auto Ltd.,Automobile and Auto Components,0.418,-0.286,Aggressive (Volatile),High,Low
+JINDALSAW,Jindal Saw Ltd.,Capital Goods,0.4776,-0.2504,Aggressive (Volatile),High,Low
+JINDALSTEL,Jindal Steel Ltd.,Metals & Mining,0.2829,-0.2149,Growth (Moderate),Medium,Medium
+JIOFIN,Jio Financial Services Ltd.,Financial Services,0.281,-0.3284,Growth (Moderate),Medium,Medium
+JKCEMENT,J.K. Cement Ltd.,Construction Materials,0.331,-0.301,Aggressive (Volatile),High,Low
+JKTYRE,JK Tyre & Industries Ltd.,Automobile and Auto Components,0.3653,-0.4485,Aggressive (Volatile),High,Low
+JMFINANCIL,JM Financial Ltd.,Financial Services,0.3972,-0.3553,Aggressive (Volatile),High,Low
+JPPOWER,Jaiprakash Power Ventures Ltd.,Power,0.5014,-0.3822,Speculative (High Risk),Extreme,Very Low
+JSL,Jindal Stainless Ltd.,Metals & Mining,0.308,-0.2344,Growth (Moderate),Medium,Medium
+JSWCEMENT,JSW Cement Ltd.,Construction Materials,0.2916,-0.2331,Growth (Moderate),Medium,Medium
+JSWENERGY,JSW Energy Ltd.,Power,0.3,-0.2325,Growth (Moderate),Medium,Medium
+JSWINFRA,JSW Infrastructure Ltd.,Services,0.3314,-0.2425,Aggressive (Volatile),High,Low
+JSWSTEEL,JSW Steel Ltd.,Metals & Mining,0.2439,-0.1335,Growth (Moderate),Medium,Medium
+JUBLFOOD,Jubilant Foodworks Ltd.,Consumer Services,0.3334,-0.3372,Aggressive (Volatile),High,Low
+JUBLINGREA,Jubilant Ingrevia Ltd.,Chemicals,0.363,-0.2763,Aggressive (Volatile),High,Low
+JWL,Jupiter Wagons Ltd.,Capital Goods,0.4477,-0.3831,Aggressive (Volatile),High,Low
+JYOTICNC,Jyoti CNC Automation Ltd.,Capital Goods,0.462,-0.438,Aggressive (Volatile),High,Low
+KAJARIACER,Kajaria Ceramics Ltd.,Consumer Durables,0.2891,-0.295,Growth (Moderate),Medium,Medium
+KALYANKJIL,Kalyan Jewellers India Ltd.,Consumer Durables,0.4777,-0.367,Aggressive (Volatile),High,Low
+KARURVYSYA,Karur Vysya Bank Ltd.,Financial Services,0.3603,-0.2247,Aggressive (Volatile),High,Low
+KAYNES,Kaynes Technology India Ltd.,Capital Goods,0.539,-0.6048,Speculative (High Risk),Extreme,Very Low
+KEC,Kec International Ltd.,Construction,0.3716,-0.5898,Aggressive (Volatile),High,Low
+KEI,KEI Industries Ltd.,Capital Goods,0.3524,-0.2414,Aggressive (Volatile),High,Low
+KFINTECH,Kfin Technologies Ltd.,Financial Services,0.3426,-0.3143,Aggressive (Volatile),High,Low
+KIMS,Krishna Institute of Medical Sciences Ltd.,Healthcare,0.3164,-0.2084,Growth (Moderate),Medium,Medium
+KIRLOSBROS,Kirloskar Brothers Ltd.,Capital Goods,0.3838,-0.3326,Aggressive (Volatile),High,Low
+KIRLOSENG,Kirloskar Oil Eng Ltd.,Capital Goods,0.4856,-0.2067,Aggressive (Volatile),High,Low
+KOTAKBANK,Kotak Mahindra Bank Ltd.,Financial Services,0.2128,-0.2061,Growth (Moderate),Medium,Medium
+KPIL,Kalpataru Projects International Ltd.,Construction,0.2998,-0.2255,Growth (Moderate),Medium,Medium
+KPITTECH,KPIT Technologies Ltd.,Information Technology,0.3889,-0.6251,Aggressive (Volatile),High,Low
+KPRMILL,K.P.R. Mill Ltd.,Textiles,0.4173,-0.2753,Aggressive (Volatile),High,Low
+KSB,KSB Ltd.,Capital Goods,0.3156,-0.2314,Growth (Moderate),Medium,Medium
+LALPATHLAB,Dr. Lal Path Labs Ltd.,Healthcare,0.2892,-0.1927,Growth (Moderate),Medium,Medium
+LAURUSLABS,Laurus Labs Ltd.,Healthcare,0.2875,-0.1627,Growth (Moderate),Medium,Medium
+LEMONTREE,Lemon Tree Hotels Ltd.,Consumer Services,0.3062,-0.4116,Growth (Moderate),Medium,Medium
+LENSKART,Lenskart Solutions Ltd.,Consumer Services,0.3555,-0.1456,Aggressive (Volatile),High,Low
+LGEINDIA,LG Electronics India Ltd.,Consumer Durables,0.2842,-0.2196,Growth (Moderate),Medium,Medium
+LICHSGFIN,LIC Housing Finance Ltd.,Financial Services,0.2691,-0.2237,Growth (Moderate),Medium,Medium
+LICI,Life Insurance Corporation of India,Financial Services,0.2602,-0.2148,Growth (Moderate),Medium,Medium
+LINDEINDIA,Linde India Ltd.,Chemicals,0.28,-0.2346,Growth (Moderate),Medium,Medium
+LLOYDSME,Lloyds Metals And Energy Ltd.,Metals & Mining,0.3666,-0.2095,Aggressive (Volatile),High,Low
+LODHA,Lodha Developers Ltd.,Realty,0.3805,-0.4519,Aggressive (Volatile),High,Low
+LT,Larsen & Toubro Ltd.,Construction,0.2526,-0.2435,Growth (Moderate),Medium,Medium
+LTF,L&T Finance Ltd.,Financial Services,0.3597,-0.2501,Aggressive (Volatile),High,Low
+LTFOODS,LT Foods Ltd.,Fast Moving Consumer Goods,0.3857,-0.2173,Aggressive (Volatile),High,Low
+LTM,LTM Ltd.,Information Technology,0.3318,-0.4404,Aggressive (Volatile),High,Low
+LTTS,L&T Technology Services Ltd.,Information Technology,0.3649,-0.3451,Aggressive (Volatile),High,Low
+LUPIN,Lupin Ltd.,Healthcare,0.1952,-0.2298,Conservative (Blue Chip),Very Low,High
+M&M,Mahindra & Mahindra Ltd.,Automobile and Auto Components,0.2671,-0.2689,Growth (Moderate),Medium,Medium
+M&MFIN,Mahindra & Mahindra Financial Services Ltd.,Financial Services,0.4012,-0.3182,Aggressive (Volatile),High,Low
+MAHABANK,Bank of Maharashtra,Financial Services,0.3596,-0.1893,Aggressive (Volatile),High,Low
+MANAPPURAM,Manappuram Finance Ltd.,Financial Services,0.3378,-0.2137,Aggressive (Volatile),High,Low
+MANKIND,Mankind Pharma Ltd.,Healthcare,0.2686,-0.223,Growth (Moderate),Medium,Medium
+MARICO,Marico Ltd.,Fast Moving Consumer Goods,0.1855,-0.1221,Conservative (Blue Chip),Very Low,High
+MARUTI,Maruti Suzuki India Ltd.,Automobile and Auto Components,0.2381,-0.3442,Growth (Moderate),Medium,Medium
+MAXHEALTH,Max Healthcare Institute Ltd.,Healthcare,0.2626,-0.2878,Growth (Moderate),Medium,Medium
+MAZDOCK,Mazagoan Dock Shipbuilders Ltd.,Capital Goods,0.341,-0.3062,Aggressive (Volatile),High,Low
+MCX,Multi Commodity Exchange of India Ltd.,Financial Services,0.3861,-0.245,Aggressive (Volatile),High,Low
+MEDANTA,Global Health Ltd.,Healthcare,0.3072,-0.3115,Growth (Moderate),Medium,Medium
+MEESHO,Meesho Ltd.,Consumer Services,0.5621,-0.4279,Speculative (High Risk),Extreme,Very Low
+MFSL,Max Financial Services Ltd.,Financial Services,0.2919,-0.2996,Growth (Moderate),Medium,Medium
+MGL,Mahanagar Gas Ltd.,Oil Gas & Consumable Fuels,0.2909,-0.3012,Growth (Moderate),Medium,Medium
+MINDACORP,Minda Corporation Ltd.,Automobile and Auto Components,0.3158,-0.2078,Growth (Moderate),Medium,Medium
+MMTC,MMTC Ltd.,Services,0.4502,-0.2862,Aggressive (Volatile),High,Low
+MOTHERSON,Samvardhana Motherson International Ltd.,Automobile and Auto Components,0.3458,-0.221,Aggressive (Volatile),High,Low
+MOTILALOFS,Motilal Oswal Financial Services Ltd.,Financial Services,0.4022,-0.4197,Aggressive (Volatile),High,Low
+MPHASIS,MphasiS Ltd.,Information Technology,0.2964,-0.3068,Growth (Moderate),Medium,Medium
+MRF,MRF Ltd.,Automobile and Auto Components,0.2245,-0.2464,Growth (Moderate),Medium,Medium
+MRPL,Mangalore Refinery & Petrochemicals Ltd.,Oil Gas & Consumable Fuels,0.498,-0.2989,Aggressive (Volatile),High,Low
+MSUMI,Motherson Sumi Wiring India Ltd.,Automobile and Auto Components,0.3024,-0.3589,Growth (Moderate),Medium,Medium
+MTARTECH,MTAR Technologies Ltd.,Capital Goods,0.6119,-0.3798,Speculative (High Risk),Extreme,Very Low
+MUTHOOTFIN,Muthoot Finance Ltd.,Financial Services,0.3714,-0.3692,Aggressive (Volatile),High,Low
+NAM-INDIA,Nippon Life India Asset Management Ltd.,Financial Services,0.3923,-0.1862,Aggressive (Volatile),High,Low
+NATCOPHARM,NATCO Pharma Ltd.,Healthcare,0.3639,-0.3445,Aggressive (Volatile),High,Low
+NATIONALUM,National Aluminium Co. Ltd.,Metals & Mining,0.417,-0.2855,Aggressive (Volatile),High,Low
+NAUKRI,Info Edge (India) Ltd.,Consumer Services,0.3119,-0.3353,Growth (Moderate),Medium,Medium
+NAVA,Nava Ltd.,Power,0.3574,-0.258,Aggressive (Volatile),High,Low
+NAVINFLUOR,Navin Fluorine International Ltd.,Chemicals,0.3665,-0.1245,Aggressive (Volatile),High,Low
+NBCC,NBCC (India) Ltd.,Construction,0.3467,-0.3918,Aggressive (Volatile),High,Low
+NCC,NCC Ltd.,Construction,0.3076,-0.431,Growth (Moderate),Medium,Medium
+NESTLEIND,Nestle India Ltd.,Fast Moving Consumer Goods,0.208,-0.1577,Growth (Moderate),Medium,Medium
+NETWEB,Netweb Technologies India Ltd.,Information Technology,0.5294,-0.3064,Speculative (High Risk),Extreme,Very Low
+NEULANDLAB,Neuland Laboratories Ltd.,Healthcare,0.3795,-0.3621,Aggressive (Volatile),High,Low
+NH,Narayana Hrudayalaya Ltd.,Healthcare,0.3022,-0.2143,Growth (Moderate),Medium,Medium
+NHPC,NHPC Ltd.,Power,0.229,-0.1597,Growth (Moderate),Medium,Medium
+NIACL,The New India Assurance Company Ltd.,Financial Services,0.5167,-0.3894,Speculative (High Risk),Extreme,Very Low
+NLCINDIA,NLC India Ltd.,Power,0.3644,-0.3484,Aggressive (Volatile),High,Low
+NMDC,NMDC Ltd.,Metals & Mining,0.2809,-0.254,Growth (Moderate),Medium,Medium
+NSLNISP,NMDC Steel Ltd.,Metals & Mining,0.3882,-0.3035,Aggressive (Volatile),High,Low
+NTPC,NTPC Ltd.,Power,0.1933,-0.2368,Conservative (Blue Chip),Very Low,High
+NTPCGREEN,NTPC Green Energy Ltd.,Power,0.2928,-0.2776,Growth (Moderate),Medium,Medium
+NUVAMA,Nuvama Wealth Management Ltd.,Financial Services,0.3626,-0.2708,Aggressive (Volatile),High,Low
+NUVOCO,Nuvoco Vistas Corporation Ltd.,Construction Materials,0.354,-0.3506,Aggressive (Volatile),High,Low
+NYKAA,FSN E-Commerce Ventures Ltd.,Consumer Services,0.2788,-0.1637,Growth (Moderate),Medium,Medium
+OBEROIRLTY,Oberoi Realty Ltd.,Realty,0.2805,-0.218,Growth (Moderate),Medium,Medium
+OFSS,Oracle Financial Services Software Ltd.,Information Technology,0.3273,-0.3143,Aggressive (Volatile),High,Low
+OIL,Oil India Ltd.,Oil Gas & Consumable Fuels,0.3105,-0.2151,Growth (Moderate),Medium,Medium
+OLAELEC,Ola Electric Mobility Ltd.,Automobile and Auto Components,0.5867,-0.6006,Speculative (High Risk),Extreme,Very Low
+OLECTRA,Olectra Greentech Ltd.,Automobile and Auto Components,0.4376,-0.4366,Aggressive (Volatile),High,Low
+ONESOURCE,Onesource Specialty Pharma Ltd.,Healthcare,0.4212,-0.4105,Aggressive (Volatile),High,Low
+ONGC,Oil & Natural Gas Corporation Ltd.,Oil Gas & Consumable Fuels,0.2382,-0.2676,Growth (Moderate),Medium,Medium
+PAGEIND,Page Industries Ltd.,Textiles,0.2421,-0.2908,Growth (Moderate),Medium,Medium
+PARADEEP,Paradeep Phosphates Ltd.,Chemicals,0.3978,-0.4728,Aggressive (Volatile),High,Low
+PATANJALI,Patanjali Foods Ltd.,Fast Moving Consumer Goods,0.287,-0.4448,Growth (Moderate),Medium,Medium
+PAYTM,One 97 Communications Ltd.,Financial Services,0.3991,-0.2989,Aggressive (Volatile),High,Low
+PCBL,PCBL Chemical Ltd.,Chemicals,0.4665,-0.392,Aggressive (Volatile),High,Low
+PERSISTENT,Persistent Systems Ltd.,Information Technology,0.3492,-0.3427,Aggressive (Volatile),High,Low
+PETRONET,Petronet LNG Ltd.,Oil Gas & Consumable Fuels,0.2938,-0.2639,Growth (Moderate),Medium,Medium
+PFC,Power Finance Corporation Ltd.,Financial Services,0.2863,-0.326,Growth (Moderate),Medium,Medium
+PFOCUS,Prime Focus Ltd.,Media Entertainment & Publication,0.5425,-0.3993,Speculative (High Risk),Extreme,Very Low
+PGEL,PG Electroplast Ltd.,Consumer Durables,0.4341,-0.3012,Aggressive (Volatile),High,Low
+PHOENIXLTD,Phoenix Mills Ltd.,Realty,0.2713,-0.2427,Growth (Moderate),Medium,Medium
+PIDILITIND,Pidilite Industries Ltd.,Chemicals,0.2278,-0.1744,Growth (Moderate),Medium,Medium
+PIIND,PI Industries Ltd.,Chemicals,0.291,-0.4475,Growth (Moderate),Medium,Medium
+PINELABS,Pine Labs Ltd.,Financial Services,0.504,-0.4502,Speculative (High Risk),Extreme,Very Low
+PIRAMALFIN,Piramal Finance Ltd.,Financial Services,0.3352,-0.1533,Aggressive (Volatile),High,Low
+PNB,Punjab National Bank,Financial Services,0.2723,-0.2483,Growth (Moderate),Medium,Medium
+PNBHOUSING,PNB Housing Finance Ltd.,Financial Services,0.3258,-0.2551,Aggressive (Volatile),High,Low
+POLICYBZR,PB Fintech Ltd.,Financial Services,0.5137,-0.5013,Speculative (High Risk),Extreme,Very Low
+POLYCAB,Polycab India Ltd.,Capital Goods,0.3048,-0.2108,Growth (Moderate),Medium,Medium
+POLYMED,Poly Medicure Ltd.,Healthcare,0.4268,-0.4227,Aggressive (Volatile),High,Low
+POONAWALLA,Poonawalla Fincorp Ltd.,Financial Services,0.3647,-0.3209,Aggressive (Volatile),High,Low
+POWERGRID,Power Grid Corporation of India Ltd.,Power,0.2067,-0.2341,Growth (Moderate),Medium,Medium
+POWERINDIA,Hitachi Energy India Ltd.,Capital Goods,0.4399,-0.2875,Aggressive (Volatile),High,Low
+PPLPHARMA,Piramal Pharma Ltd.,Healthcare,0.3384,-0.3471,Aggressive (Volatile),High,Low
+PREMIERENE,Premier Energies Ltd.,Capital Goods,0.337,-0.379,Aggressive (Volatile),High,Low
+PRESTIGE,Prestige Estates Projects Ltd.,Realty,0.3424,-0.3688,Aggressive (Volatile),High,Low
+PRIVISCL,Privi Speciality Chemicals Ltd.,Chemicals,0.3406,-0.2278,Aggressive (Volatile),High,Low
+PTCIL,PTC Industries Ltd.,Capital Goods,0.3701,-0.2321,Aggressive (Volatile),High,Low
+PVRINOX,PVR INOX Ltd.,Media Entertainment & Publication,0.3304,-0.2598,Aggressive (Volatile),High,Low
+PWL,Physicswallah Ltd.,Consumer Services,0.535,-0.4875,Speculative (High Risk),Extreme,Very Low
+RADICO,Radico Khaitan Ltd,Fast Moving Consumer Goods,0.3353,-0.2473,Aggressive (Volatile),High,Low
+RAILTEL,Railtel Corporation Of India Ltd.,Telecommunication,0.3882,-0.3773,Aggressive (Volatile),High,Low
+RAINBOW,Rainbow Childrens Medicare Ltd.,Healthcare,0.2342,-0.239,Growth (Moderate),Medium,Medium
+RAMCOCEM,The Ramco Cements Ltd.,Construction Materials,0.2562,-0.3279,Growth (Moderate),Medium,Medium
+RBLBANK,RBL Bank Ltd.,Financial Services,0.3237,-0.1301,Aggressive (Volatile),High,Low
+RECLTD,REC Ltd.,Financial Services,0.2829,-0.2374,Growth (Moderate),Medium,Medium
+REDINGTON,Redington Ltd.,Services,0.4576,-0.3256,Aggressive (Volatile),High,Low
+RELIANCE,Reliance Industries Ltd.,Oil Gas & Consumable Fuels,0.2115,-0.2639,Growth (Moderate),Medium,Medium
+RHIM,RHI MAGNESITA INDIA LTD.,Capital Goods,0.4065,-0.321,Aggressive (Volatile),High,Low
+RITES,RITES Ltd.,Construction,0.3416,-0.3042,Aggressive (Volatile),High,Low
+RKFORGE,Ramkrishna Forgings Ltd.,Automobile and Auto Components,0.3592,-0.2,Aggressive (Volatile),High,Low
+RPOWER,Reliance Power Ltd.,Power,0.4584,-0.6005,Aggressive (Volatile),High,Low
+RRKABEL,R R Kabel Ltd.,Capital Goods,0.3978,-0.1868,Aggressive (Volatile),High,Low
+RUBICON,Rubicon Research Ltd.,Healthcare,0.4515,-0.1812,Aggressive (Volatile),High,Low
+RVNL,Rail Vikas Nigam Ltd.,Construction,0.345,-0.5144,Aggressive (Volatile),High,Low
+SAGILITY,Sagility Ltd.,Information Technology,0.3498,-0.3333,Aggressive (Volatile),High,Low
+SAIL,Steel Authority of India Ltd.,Metals & Mining,0.3675,-0.2191,Aggressive (Volatile),High,Low
+SAILIFE,Sai Life Sciences Ltd.,Healthcare,0.3369,-0.1855,Aggressive (Volatile),High,Low
+SAMMAANCAP,Sammaan Capital Ltd.,Financial Services,0.3746,-0.3343,Aggressive (Volatile),High,Low
+SANSERA,Sansera Engineering Ltd.,Automobile and Auto Components,0.4236,-0.17,Aggressive (Volatile),High,Low
+SARDAEN,Sarda Energy and Minerals Ltd.,Metals & Mining,0.3185,-0.2268,Growth (Moderate),Medium,Medium
+SBICARD,SBI Cards and Payment Services Ltd.,Financial Services,0.2755,-0.4141,Growth (Moderate),Medium,Medium
+SBILIFE,SBI Life Insurance Company Ltd.,Financial Services,0.2127,-0.2148,Growth (Moderate),Medium,Medium
+SBIN,State Bank of India,Financial Services,0.2353,-0.2211,Growth (Moderate),Medium,Medium
+SCHAEFFLER,Schaeffler India Ltd.,Automobile and Auto Components,0.2873,-0.1685,Growth (Moderate),Medium,Medium
+SCHNEIDER,Schneider Electric Infrastructure Ltd.,Capital Goods,0.4926,-0.3492,Aggressive (Volatile),High,Low
+SCI,Shipping Corporation of India Ltd.,Services,0.4631,-0.2559,Aggressive (Volatile),High,Low
+SHREECEM,Shree Cement Ltd.,Construction Materials,0.2261,-0.2763,Growth (Moderate),Medium,Medium
+SHRIPISTON,SPR Auto Technologies Ltd.,Automobile and Auto Components,0.3926,-0.2092,Aggressive (Volatile),High,Low
+SHRIRAMFIN,Shriram Finance Ltd.,Financial Services,0.3598,-0.2105,Aggressive (Volatile),High,Low
+SHYAMMETL,Shyam Metalics and Energy Ltd.,Capital Goods,0.2846,-0.2063,Growth (Moderate),Medium,Medium
+SIEMENS,Siemens Ltd.,Capital Goods,0.3123,-0.1528,Growth (Moderate),Medium,Medium
+SIGNATURE,Signatureglobal (India) Ltd.,Realty,0.3631,-0.3807,Aggressive (Volatile),High,Low
+SJVN,SJVN Ltd.,Power,0.3158,-0.3898,Growth (Moderate),Medium,Medium
+SOBHA,Sobha Ltd.,Realty,0.3037,-0.32,Growth (Moderate),Medium,Medium
+SOLARINDS,Solar Industries India Ltd.,Chemicals,0.3603,-0.203,Aggressive (Volatile),High,Low
+SONACOMS,Sona BLW Precision Forgings Ltd.,Automobile and Auto Components,0.3155,-0.1315,Growth (Moderate),Medium,Medium
+SRF,SRF Ltd.,Chemicals,0.2944,-0.2489,Growth (Moderate),Medium,Medium
+STARHEALTH,Star Health and Allied Insurance Company Ltd.,Financial Services,0.2367,-0.1862,Growth (Moderate),Medium,Medium
+STLTECH,Sterlite Technologies Ltd.,Telecommunication,0.6175,-0.2995,Speculative (High Risk),Extreme,Very Low
+SUMICHEM,Sumitomo Chemical India Ltd.,Chemicals,0.3535,-0.3271,Aggressive (Volatile),High,Low
+SUNDARMFIN,Sundaram Finance Ltd.,Financial Services,0.2803,-0.271,Growth (Moderate),Medium,Medium
+SUNPHARMA,Sun Pharmaceutical Industries Ltd.,Healthcare,0.1941,-0.1323,Conservative (Blue Chip),Very Low,High
+SUNTV,Sun TV Network Ltd.,Media Entertainment & Publication,0.344,-0.3042,Aggressive (Volatile),High,Low
+SUPREMEIND,Supreme Industries Ltd.,Capital Goods,0.278,-0.2521,Growth (Moderate),Medium,Medium
+SUZLON,Suzlon Energy Ltd.,Capital Goods,0.3364,-0.3927,Aggressive (Volatile),High,Low
+SWANCORP,Swan Corp Ltd.,Chemicals,0.3494,-0.4579,Aggressive (Volatile),High,Low
+SWIGGY,Swiggy Ltd.,Consumer Services,0.376,-0.4817,Aggressive (Volatile),High,Low
+SYNGENE,Syngene International Ltd.,Healthcare,0.3348,-0.4773,Aggressive (Volatile),High,Low
+SYRMA,Syrma SGS Technology Ltd.,Capital Goods,0.4449,-0.2912,Aggressive (Volatile),High,Low
+TARIL,Transformers And Rectifiers (India) Ltd.,Capital Goods,0.5992,-0.5353,Speculative (High Risk),Extreme,Very Low
+TATACAP,Tata Capital Ltd.,Financial Services,0.2748,-0.1772,Growth (Moderate),Medium,Medium
+TATACHEM,Tata Chemicals Ltd.,Chemicals,0.3825,-0.3707,Aggressive (Volatile),High,Low
+TATACOMM,Tata Communications Ltd.,Telecommunication,0.3346,-0.3162,Aggressive (Volatile),High,Low
+TATACONSUM,Tata Consumer Products Ltd.,Fast Moving Consumer Goods,0.2286,-0.2466,Growth (Moderate),Medium,Medium
+TATAELXSI,Tata Elxsi Ltd.,Information Technology,0.3329,-0.4789,Aggressive (Volatile),High,Low
+TATAINVEST,Tata Investment Corporation Ltd.,Financial Services,0.3859,-0.4771,Aggressive (Volatile),High,Low
+TATAPOWER,Tata Power Co. Ltd.,Power,0.2175,-0.2687,Growth (Moderate),Medium,Medium
+TATASTEEL,Tata Steel Ltd.,Metals & Mining,0.2597,-0.2063,Growth (Moderate),Medium,Medium
+TATATECH,Tata Technologies Ltd.,Information Technology,0.3321,-0.2904,Aggressive (Volatile),High,Low
+TBOTEK,TBO Tek Ltd.,Consumer Services,0.3579,-0.4118,Aggressive (Volatile),High,Low
+TCS,Tata Consultancy Services Ltd.,Information Technology,0.2899,-0.3846,Growth (Moderate),Medium,Medium
+TDPOWERSYS,TD Power Systems Ltd.,Capital Goods,0.5465,-0.2422,Speculative (High Risk),Extreme,Very Low
+TECHM,Tech Mahindra Ltd.,Information Technology,0.2743,-0.2469,Growth (Moderate),Medium,Medium
+TECHNOE,Techno Electric & Engineering Company Ltd.,Construction,0.3941,-0.3469,Aggressive (Volatile),High,Low
+TEGA,Tega Industries Ltd.,Capital Goods,0.3706,-0.2619,Aggressive (Volatile),High,Low
+TEJASNET,Tejas Networks Ltd.,Telecommunication,0.5894,-0.5077,Speculative (High Risk),Extreme,Very Low
+TENNIND,Tenneco Clean Air India Ltd.,Automobile and Auto Components,0.3659,-0.2846,Aggressive (Volatile),High,Low
+THANGAMAYL,Thangamayil Jewellery Ltd.,Consumer Durables,0.6117,-0.3546,Speculative (High Risk),Extreme,Very Low
+THERMAX,Thermax Ltd.,Capital Goods,0.3589,-0.3893,Aggressive (Volatile),High,Low
+TIINDIA,Tube Investments of India Ltd.,Automobile and Auto Components,0.3486,-0.3361,Aggressive (Volatile),High,Low
+TIMKEN,Timken India Ltd.,Capital Goods,0.2878,-0.2219,Growth (Moderate),Medium,Medium
+TITAGARH,Titagarh Rail Systems Ltd.,Capital Goods,0.3596,-0.38,Aggressive (Volatile),High,Low
+TITAN,Titan Company Ltd.,Consumer Durables,0.2385,-0.1566,Growth (Moderate),Medium,Medium
+TMCV,Tata Motors Ltd.,Capital Goods,0.3819,-0.2908,Aggressive (Volatile),High,Low
+TMPV,Tata Motors Passenger Vehicles Ltd.,Automobile and Auto Components,0.5053,-0.6137,Speculative (High Risk),Extreme,Very Low
+TORNTPHARM,Torrent Pharmaceuticals Ltd.,Healthcare,0.2218,-0.1032,Growth (Moderate),Medium,Medium
+TORNTPOWER,Torrent Power Ltd.,Power,0.3071,-0.3271,Growth (Moderate),Medium,Medium
+TRENT,Trent Ltd.,Consumer Services,0.4819,-0.5436,Aggressive (Volatile),High,Low
+TRIDENT,Trident Ltd.,Textiles,0.2977,-0.2463,Growth (Moderate),Medium,Medium
+TRITURBINE,Triveni Turbine Ltd.,Capital Goods,0.3753,-0.3083,Aggressive (Volatile),High,Low
+TTML,Tata Teleservices (Maharashtra) Ltd.,Telecommunication,0.4149,-0.4656,Aggressive (Volatile),High,Low
+TVSMOTOR,TVS Motor Company Ltd.,Automobile and Auto Components,0.2751,-0.1667,Growth (Moderate),Medium,Medium
+UBL,United Breweries Ltd.,Fast Moving Consumer Goods,0.2302,-0.3662,Growth (Moderate),Medium,Medium
+UCOBANK,UCO Bank,Financial Services,0.2745,-0.3314,Growth (Moderate),Medium,Medium
+ULTRACEMCO,UltraTech Cement Ltd.,Construction Materials,0.2337,-0.2061,Growth (Moderate),Medium,Medium
+UNIONBANK,Union Bank of India,Financial Services,0.3281,-0.2145,Aggressive (Volatile),High,Low
+UNITDSPR,United Spirits Ltd.,Fast Moving Consumer Goods,0.2437,-0.1611,Growth (Moderate),Medium,Medium
+UNOMINDA,UNO Minda Ltd.,Automobile and Auto Components,0.3343,-0.2579,Aggressive (Volatile),High,Low
+UPL,UPL Ltd.,Chemicals,0.3341,-0.3969,Aggressive (Volatile),High,Low
+URBANCO,Urban Company Ltd.,Consumer Services,0.4562,-0.3919,Aggressive (Volatile),High,Low
+USHAMART,Usha Martin Ltd.,Capital Goods,0.3336,-0.1957,Aggressive (Volatile),High,Low
+UTIAMC,UTI Asset Management Company Ltd.,Financial Services,0.2825,-0.3538,Growth (Moderate),Medium,Medium
+VAML,Vedanta Aluminium Metal Ltd.,Metals & Mining,0.3558,-0.2375,Aggressive (Volatile),High,Low
+VBL,Varun Beverages Ltd.,Fast Moving Consumer Goods,0.2975,-0.2631,Growth (Moderate),Medium,Medium
+VEDL,Vedanta Ltd.,Metals & Mining,0.7477,-0.6799,Speculative (High Risk),Extreme,Very Low
+VEDPOWER,Vedanta Power Ltd.,Power,0.4864,-0.3777,Aggressive (Volatile),High,Low
+VIJAYA,Vijaya Diagnostic Centre Ltd.,Healthcare,0.3255,-0.2024,Aggressive (Volatile),High,Low
+VISL,Vedanta Iron and Steel Ltd.,Metals & Mining,0.6273,-0.3327,Speculative (High Risk),Extreme,Very Low
+VMM,Vishal Mega Mart Ltd.,Consumer Services,0.3127,-0.356,Growth (Moderate),Medium,Medium
+VOGL,Vedanta Oil and Gas Ltd.,Oil Gas & Consumable Fuels,0.7185,-0.3301,Speculative (High Risk),Extreme,Very Low
+VOLTAS,Voltas Ltd.,Consumer Durables,0.3132,-0.3369,Growth (Moderate),Medium,Medium
+VTL,Vardhman Textiles Ltd.,Textiles,0.3263,-0.2117,Aggressive (Volatile),High,Low
+WAAREEENER,Waaree Energies Ltd.,Capital Goods,0.3562,-0.3604,Aggressive (Volatile),High,Low
+WELCORP,Welspun Corp Ltd.,Capital Goods,0.4384,-0.2525,Aggressive (Volatile),High,Low
+WELSPUNLIV,Welspun Living Ltd.,Textiles,0.4593,-0.2721,Aggressive (Volatile),High,Low
+WHIRLPOOL,Whirlpool of India Ltd.,Consumer Durables,0.425,-0.4919,Aggressive (Volatile),High,Low
+WIPRO,Wipro Ltd.,Information Technology,0.256,-0.4034,Growth (Moderate),Medium,Medium
+WOCKPHARMA,Wockhardt Ltd.,Healthcare,0.4963,-0.2723,Aggressive (Volatile),High,Low
+YESBANK,Yes Bank Ltd.,Financial Services,0.287,-0.2821,Growth (Moderate),Medium,Medium
+ZEEL,Zee Entertainment Enterprises Ltd.,Media Entertainment & Publication,0.467,-0.3952,Aggressive (Volatile),High,Low
+ZENSARTECH,Zensar Technolgies Ltd.,Information Technology,0.3903,-0.4718,Aggressive (Volatile),High,Low
+ZENTEC,Zen Technologies Ltd.,Capital Goods,0.3783,-0.2414,Aggressive (Volatile),High,Low
+ZFCVINDIA,ZF Commercial Vehicle Control Systems India Ltd.,Automobile and Auto Components,0.3034,-0.2235,Growth (Moderate),Medium,Medium
+ZYDUSLIFE,Zydus Lifesciences Ltd.,Healthcare,0.2361,-0.1512,Growth (Moderate),Medium,Medium
+ZYDUSWELL,Zydus Wellness Ltd.,Fast Moving Consumer Goods,0.3854,-0.2438,Aggressive (Volatile),High,Low

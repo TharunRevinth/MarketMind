@@ -60,15 +60,15 @@ def get_trader_intelligence(ticker):
                 sentiment_score += 1
 
         if sentiment_score <= -3:
-            verdict = "BEARISH 📉"
+            verdict = "BEARISH"
             move = "SHORT / AVOID"
             reason = "Significant bearish triggers detected in recent headlines. High risk of correction."
         elif sentiment_score < 0:
-            verdict = "CAUTIOUS ⚠️"
+            verdict = "CAUTIOUS"
             move = "WAIT / PROTECT"
             reason = "Mixed sentiment with some negative undertones. Monitor support levels."
         else:
-            verdict = "BULLISH 🚀"
+            verdict = "BULLISH"
             move = "LONG / ACCUMULATE"
             reason = "News sentiment is largely positive or stable. No immediate red flags."
 
@@ -152,27 +152,46 @@ def get_prediction_of_the_day():
                 if conf > best_conf:
                     best_conf = conf
                     best_ticker = ticker
-                    best_dir = "UP 📈" if prediction == 1 else "DOWN 📉"
+                    best_dir = "UP" if prediction == 1 else "DOWN"
             except:
                 continue
     return best_ticker, best_dir, best_conf
 
-def load_model(ticker):
+def load_model(ticker, auto_train=False):
+    """
+    Loads the trained intraday Logistic Regression model and scaler for a ticker.
+    If auto_train=True and model is missing, trains it on-demand and caches to models/.
+    Never crashes, returning (None, None) gracefully.
+    """
     try:
-        # Standardizing ticker to match the training script output (Ticker.NS)
-        path_model = f"models/{ticker}.NS_model.pkl"
-        path_scaler = f"models/{ticker}.NS_scaler.pkl"
-        
-        with open(path_model, "rb") as f:
-            model = pickle.load(f)
-        with open(path_scaler, "rb") as f:
-            scaler = pickle.load(f)
-        return model, scaler
+        clean_ticker = ticker.replace(".NS", "")
+        path_model = f"models/{clean_ticker}.NS_model.pkl"
+        path_scaler = f"models/{clean_ticker}.NS_scaler.pkl"
+
+        if os.path.exists(path_model) and os.path.exists(path_scaler):
+            with open(path_model, "rb") as f:
+                model = pickle.load(f)
+            with open(path_scaler, "rb") as f:
+                scaler = pickle.load(f)
+            return model, scaler
+
+        # If missing and auto-train requested
+        if auto_train:
+            from scripts.train_model import train_and_save
+            train_and_save(f"{clean_ticker}.NS")
+            if os.path.exists(path_model) and os.path.exists(path_scaler):
+                with open(path_model, "rb") as f:
+                    model = pickle.load(f)
+                with open(path_scaler, "rb") as f:
+                    scaler = pickle.load(f)
+                return model, scaler
+
+        return None, None
     except Exception as e:
         return None, None
 
 # --- UI CONFIG ---
-st.set_page_config(page_title="MarketMind", layout="wide", page_icon="📈")
+st.set_page_config(page_title="MarketMind", layout="wide")
 
 # Premium CSS Theme Injection
 st.markdown("""
@@ -332,7 +351,7 @@ st.sidebar.info(f"Risk Profile: **{user_risk_cat}**\nRisk Level: **{user_risk_le
 
 # --- MANUAL OVERRIDE (For Low Probabilities) ---
 st.sidebar.divider()
-st.sidebar.header("🛠️ Manual Analysis Mode")
+st.sidebar.header("Manual Analysis Mode")
 manual_mode = st.sidebar.toggle("Enable Manual Override", help="Use this when the AI signal is WEAK or for news-driven events.")
 manual_trend = "NEUTRAL"
 manual_move = 0.0
@@ -372,23 +391,33 @@ if not user_matches.empty:
     top_3 = candidates.sort_values(by='Sentiment_Score', ascending=False).head(3)
     
     for _, row in top_3.iterrows():
-        emoji = "🚀" if row['Sentiment_Score'] > 0 else "📉" if row['Sentiment_Score'] < 0 else "⚖️"
-        st.sidebar.write(f"{emoji} **{row['Ticker']}**")
+        prefix = "[+] " if row['Sentiment_Score'] > 0 else "[-] " if row['Sentiment_Score'] < 0 else "[=] "
+        st.sidebar.write(f"**{prefix}{row['Ticker']}**")
         st.sidebar.caption(f"News: {row['Sentiment_Label']} | Risk: {row['Risk_Level']}")
 else:
     st.sidebar.write("Scan stocks to see picks")
 
 # --- MAIN CONTENT ---
-tab_terminal, tab_basket = st.tabs(["📊 Single Stock Terminal", "🧺 Basket Builder"])
+tab_terminal, tab_basket = st.tabs(["Single Stock Terminal", "Basket Builder"])
 
 with tab_terminal:
     ticker_list = cats['Ticker'].tolist()
     if not ticker_list:
         ticker_list = ["RELIANCE", "TCS", "INFY"] # Fallback
 
-    ticker_col, info_col = st.columns([1, 2.8])
+    # Company name lookup map for searchability
+    company_dict = {}
+    if 'Company_Name' in cats.columns:
+        company_dict = dict(zip(cats['Ticker'], cats['Company_Name']))
+
+    ticker_col, info_col = st.columns([1.2, 2.6])
     with ticker_col:
-        ticker_input = st.selectbox("Select Asset", ticker_list)
+        ticker_input = st.selectbox(
+            "Select or Search Asset (Symbol / Company)",
+            ticker_list,
+            format_func=lambda sym: f"{sym} - {company_dict.get(sym, '')}" if company_dict.get(sym) else sym,
+            help="Type to search any of the 499 Nifty 500 stocks by ticker symbol or company name."
+        )
     full_ticker = ticker_input + ".NS"
 
     with info_col:
@@ -653,7 +682,7 @@ with tab_terminal:
                     </div>
                 """, unsafe_allow_html=True)
             elif model:
-                direction = "BULLISH" if is_up else "BEARISH 📉"
+                direction = "BULLISH" if is_up else "BEARISH"
                 dir_color = "#00f2ad" if is_up else "#ff4b4b"
                 confidence = max(prob_val) * 100
 
@@ -665,15 +694,23 @@ with tab_terminal:
                     </div>
                 """, unsafe_allow_html=True)
             else:
-                pulse_dir = "BULLISH" if is_up else "BEARISH 📉"
+                pulse_dir = "BULLISH" if is_up else "BEARISH"
                 pulse_color = "#00f2ad" if is_up else "#ff4b4b"
                 st.markdown(f"""
                     <div class="glass-card">
-                        <div class="metric-label"><i class="fas fa-wave-square"></i> Pulse Signal</div>
+                        <div class="metric-label"><i class="fas fa-wave-square"></i> Technical Signal</div>
                         <div class="metric-value" style="color: {pulse_color};">{pulse_dir}</div>
-                        <div style="font-size: 0.8rem; color: #8892b0;">Technical Edge Only</div>
+                        <div style="font-size: 0.8rem; color: #ffbd03;">No AI model yet &bull; MA Confluence</div>
                     </div>
                 """, unsafe_allow_html=True)
+                if st.button(f"Train AI Model for {ticker_input}", key=f"train_{ticker_input}", use_container_width=True):
+                    with st.spinner(f"Training 5-minute Logistic Regression model for {ticker_input}..."):
+                        m_new, s_new = load_model(ticker_input, auto_train=True)
+                        if m_new:
+                            st.success(f"Model trained and cached for {ticker_input}!")
+                            st.rerun()
+                        else:
+                            st.warning(f"Could not fetch enough 5-minute intraday bars to train {ticker_input}.")
 
         with m_col3:
             if not manual_mode:
@@ -959,7 +996,7 @@ with tab_terminal:
                     with st.container():
                         col_icon, col_content = st.columns([1, 15])
                         with col_icon:
-                            st.markdown("### 📰")
+                            st.markdown("### [News]")
                         with col_content:
                             st.markdown(f"**[{title}]({link})**")
                             st.caption(f"Source: {publisher} | Type: {n_type}")

@@ -61,6 +61,52 @@ def generate_technical_reasons(row: pd.Series) -> str:
     return " | ".join(reasons[:3])
 
 
+def generate_plain_english_reason(row: pd.Series) -> str:
+    """
+    Generates a single, clear, jargon-free sentence explaining why this stock is selected.
+    Avoids acronyms and technical jargon (no ATR, Beta, IC, DMA, RSI numbers).
+    """
+    mom_12_1 = row.get("Mom_12_1", np.nan)
+    mom_6m = row.get("Mom_6M", np.nan)
+    dist_52 = row.get("Dist_52W_High", np.nan)
+    vol_surge = row.get("Vol_Surge_20D", np.nan)
+    rs_3m = row.get("RS_3M", np.nan)
+
+    if pd.notnull(mom_12_1) and mom_12_1 >= 0.40:
+        return f"Exceptional 12-month leader, gaining over {mom_12_1*100:.0f}% in the past year."
+    elif pd.notnull(dist_52) and dist_52 >= -0.05:
+        return "Trading near its 52-week record high with consistent buyer accumulation."
+    elif pd.notnull(vol_surge) and vol_surge >= 1.5:
+        return "Recent heavy institutional buying volume supporting price breakout."
+    elif pd.notnull(rs_3m) and rs_3m >= 0.10:
+        return f"Significantly outperforming the broader market by +{rs_3m*100:.0f}% over the last 3 months."
+    elif pd.notnull(mom_6m) and mom_6m >= 0.20:
+        return f"Strong 6-month upward trend, gaining +{mom_6m*100:.0f}% with steady demand."
+    elif pd.notnull(mom_12_1) and mom_12_1 > 0:
+        return f"Consistent 12-month momentum (+{mom_12_1*100:.0f}%) with solid price stability."
+    else:
+        return "Steady upward trend with favorable risk-adjusted returns across recent months."
+
+
+def get_stock_health_status(row: pd.Series) -> tuple[str, str, str]:
+    """
+    Returns (status_label, badge_color, explanation) for Investor Mode:
+    - Green: Healthy Uptrend (comfortable margin above exit price and short-term trend)
+    - Yellow: Consolidating / Watch (pulling back toward support or near short-term trend)
+    - Red: High Risk / Near Exit (within 3% of exit price or breaking down)
+    """
+    current_price = row.get("Current_Price", row.get("Close", np.nan))
+    stop_loss = row.get("Stop_Loss", np.nan)
+    price_vs_50 = row.get("Price_vs_SMA50", 0.0)
+
+    if pd.notnull(current_price) and pd.notnull(stop_loss) and current_price <= stop_loss * 1.03:
+        return ("Near Exit", "#ff4b4b", "Trading within 3% of exit price. Monitor closely.")
+    elif price_vs_50 < -0.02:
+        return ("Consolidating", "#ffbd03", "Short-term pullback underway. Holding above exit price.")
+    else:
+        return ("Strong Uptrend", "#00f2ad", "Trading comfortably above key averages and safety exit price.")
+
+
 def filter_by_risk_tier(candidates_df: pd.DataFrame, risk_tier: str) -> pd.DataFrame:
     """
     Filters the scored candidate universe into Conservative, Balanced, or Aggressive cohorts.
